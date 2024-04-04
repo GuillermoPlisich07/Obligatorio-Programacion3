@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Dominio
 {
-    public class Articulo : IValidable
+    public class Usuario : IValidable
     {
         public int id { get; set; }
+        public string email { get; set; }
         public string nombre { get; set; }
-        public string descripcion { get; set; }
-        public int codigoProveedor { get; set; }
-        public PrecioArticulo precioPublico { get; set; }
-        public int stock { get; set; }
+        public string apellido { get; set; }
+        public string password { get; set; }
 
         public void Validar()
         {
