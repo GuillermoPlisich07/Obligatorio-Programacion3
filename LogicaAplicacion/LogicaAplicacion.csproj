@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="CasosUso\" />
-    <Folder Include="InterfacesCU\" />
   </ItemGroup>
 
 </Project>
