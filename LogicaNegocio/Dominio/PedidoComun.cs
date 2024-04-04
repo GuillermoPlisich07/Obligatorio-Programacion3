@@ -10,5 +10,6 @@ namespace LogicaNegocio.Dominio
     {
         public decimal distancia { get; set; }
 
+        public decimal valor { get; set; }  
     }
 }
