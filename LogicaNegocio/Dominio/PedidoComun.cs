@@ -10,6 +10,5 @@ namespace LogicaNegocio.Dominio
     {
         public decimal distancia { get; set; }
 
-       public decimal kilometros { get; set; }
     }
 }
