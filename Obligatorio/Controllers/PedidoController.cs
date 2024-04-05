@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LogicaAplicacion.InterfacesCU;
+using LogicaNegocio.Dominio;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Obligatorio.Controllers
@@ -7,9 +9,9 @@ namespace Obligatorio.Controllers
     {
         ICUAlta<Pedido> CUAltaPedido { get; set; }
         ICUListado<Pedido> CUListadoPedido { get; set; }
-        ICUBaja<Pedido> CUBajaPedido { get; set; }  
+        ICUBaja CUBajaPedido { get; set; }  
 
-        public PedidoController(ICUAlta<Pedido> cUAltaPedido, ICUListado<Pedido> cUListadoPedido, ICUBaja<Pedido> cUBajaPedido)
+        public PedidoController(ICUAlta<Pedido> cUAltaPedido, ICUListado<Pedido> cUListadoPedido, ICUBaja cUBajaPedido)
         {
             CUAltaPedido = cUAltaPedido;
             CUListadoPedido = cUListadoPedido;

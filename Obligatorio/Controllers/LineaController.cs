@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Dominio;
+﻿using LogicaAplicacion.InterfacesCU;
+using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +8,10 @@ namespace Obligatorio.Controllers
     public class LineaController : Controller
     {
         public ICUAlta<Linea> CUAltaLinea { get; set; }
-        public ICUBaja<Linea> CUBajaLinea { get; set; }
+        public ICUBaja CUBajaLinea { get; set; }
         public ICUModificar<Linea> CUModificarLinea { get; set; }
 
-        public LineaController ( ICUAlta<Linea> cUAltaLinea, ICUBaja<Linea> cUBajaLinea, ICUModificar<Linea> cUModificarLinea)
+        public LineaController ( ICUAlta<Linea> cUAltaLinea, ICUBaja cUBajaLinea, ICUModificar<Linea> cUModificarLinea)
         {
             CUAltaLinea = cUAltaLinea;
             CUBajaLinea = cUBajaLinea;

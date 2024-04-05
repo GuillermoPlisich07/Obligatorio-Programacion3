@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Dominio;
+﻿using LogicaAplicacion.InterfacesCU;
+using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

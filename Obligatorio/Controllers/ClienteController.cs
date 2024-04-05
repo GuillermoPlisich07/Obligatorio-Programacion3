@@ -1,5 +1,5 @@
-﻿using LogicaNegocio.Dominio;
-using LogicaAplicacion.InterfacesCU;
+﻿using LogicaAplicacion.InterfacesCU;
+using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +8,11 @@ namespace Obligatorio.Controllers
     public class ClienteController : Controller
     {
         public ICUModificar<Cliente> CUModificarCliente { get; set; }
-        public ICUBaja<Cliente> CUBajaCliente { get; set; }
+        public ICUBaja CUBajaCliente { get; set; }
         public ICUAlta<Cliente> CUAltaCliente { get; set; }
-        public ICUBuscar<Cliente> CUBuscarCliente { get; set; } 
+        public ICUBuscarPorId<Cliente> CUBuscarCliente { get; set; } 
 
-        public ClienteController(ICUModificar<Cliente> cUModificarCliente, ICUBaja<Cliente> cUBajaCliente, ICUAlta<Cliente> cUAltaCliente, ICUBuscar<Cliente> cUBuscarCliente)
+        public ClienteController(ICUModificar<Cliente> cUModificarCliente, ICUBaja cUBajaCliente, ICUAlta<Cliente> cUAltaCliente, ICUBuscarPorId<Cliente> cUBuscarCliente)
         {
             CUModificarCliente = cUModificarCliente;
             CUBajaCliente = cUBajaCliente;

@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Dominio;
+﻿using LogicaAplicacion.InterfacesCU;
+using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Obligatorio.Controllers
@@ -7,11 +8,16 @@ namespace Obligatorio.Controllers
     public class UsuarioController : Controller
     {
 
-            public ICUAlta<Usuario> CUAltaUsuario { get; set; }
-            public ICUBaja<Usuario> CUBajaUsuario { get; set; }
-            public ICUModificar<Usuario> CUModificarUsuario { get; set; }
+        public ICUAlta<Usuario> CUAltaUsuario { get; set; }
+        public ICUBaja CUBajaUsuario { get; set; }
+        public ICUModificar<Usuario> CUModificarUsuario { get; set; }
 
-
+        public UsuarioController(ICUAlta<Usuario> cuAltaUsuario, ICUBaja cuBajaUsuario, ICUModificar<Usuario> cuModificarUsuario)
+        {
+            CUAltaUsuario = cuAltaUsuario;
+            CUBajaUsuario = cuBajaUsuario;
+            CUModificarUsuario = cuModificarUsuario;
+        }
 
         // GET: UsuarioController
         public ActionResult Index()
