@@ -17,6 +17,10 @@ namespace LogicaNegocio.Dominio
         public decimal recarga { get; set; }
         public DateTime fechaPrometida { get; set; }
 
+        public void Validar()
+        {
+            // TODO
+        }
 
 
     }
