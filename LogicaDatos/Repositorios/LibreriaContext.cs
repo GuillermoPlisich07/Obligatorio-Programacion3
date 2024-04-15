@@ -19,5 +19,11 @@ namespace LogicaDatos.Repositorios
         public DbSet<Plazo> Plazos { get; set; }
         public DbSet<PrecioArticulo> PreciosArticulos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLOCALDB; Initial Catalog=ObligatorioP3_Marzo2024; Integrated Security=SSPI;");
+        }
     }
 }
