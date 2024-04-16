@@ -58,7 +58,24 @@ namespace LogicaDatos.Repositorios
 
         public Usuario Login(string email, string password)
         {
-            throw new NotImplementedException();
+            Usuario user = FindByEmail(email);
+
+            if (user!=null)
+            {
+                if (user.VerificarPassword(password))
+                {
+                    return user;
+                }
+            }
+
+            return user;
+        }
+
+        public Usuario FindByEmail(string email)
+        {
+            return Contexto.Usuarios
+                .Where(Usuario => Usuario.email == email)
+                .SingleOrDefault();
         }
     }
 }
