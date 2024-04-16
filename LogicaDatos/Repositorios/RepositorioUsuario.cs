@@ -11,7 +11,7 @@ namespace LogicaDatos.Repositorios
     public class RepositorioUsuario : IRepositorioUsuario
     {
         public LibreriaContext Contexto { get; set; }
-
+        
         public RepositorioUsuario(LibreriaContext ctx)
         {
             Contexto = ctx;
@@ -54,6 +54,11 @@ namespace LogicaDatos.Repositorios
             obj.Validar();
             Contexto.Update(obj);
             Contexto.SaveChanges();
+        }
+
+        public Usuario Login(string email, string password)
+        {
+            throw new NotImplementedException();
         }
     }
 }
