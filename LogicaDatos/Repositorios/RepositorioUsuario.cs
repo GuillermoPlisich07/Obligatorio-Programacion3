@@ -11,7 +11,7 @@ namespace LogicaDatos.Repositorios
     public class RepositorioUsuario : IRepositorioUsuario
     {
         public LibreriaContext Contexto { get; set; }
-
+        
         public RepositorioUsuario(LibreriaContext ctx)
         {
             Contexto = ctx;

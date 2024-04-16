@@ -10,29 +10,49 @@ namespace LogicaDatos.Repositorios
 {
     internal class RepositorioCliente : IRepositorioCliente
     {
+        public LibreriaContext Contexto { get; set; }
+
+        public RepositorioCliente(LibreriaContext ctx)
+        {
+            Contexto = ctx;
+        }
+
         public void Add(Cliente item)
         {
-            throw new NotImplementedException();
+            if (item != null)
+            {
+                item.Validar();
+                Contexto.Clientes.Add(item);
+                Contexto.SaveChanges(); // Aca es el alta en EF
+            }
         }
 
         public List<Cliente> FindAll()
         {
-            throw new NotImplementedException();
+            return Contexto.Clientes.ToList();
         }
 
         public Cliente FindById(int id)
         {
-            throw new NotImplementedException();
+            return Contexto.Clientes
+                .Where(Usuario => Usuario.id == id)
+                .SingleOrDefault();
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            Cliente aBorrar = Contexto.Clientes.Find(id);
+            if (aBorrar != null)
+            {
+                Contexto.Clientes.Remove(aBorrar);
+                Contexto.SaveChanges();
+            }
         }
 
         public void Update(Cliente obj)
         {
-            throw new NotImplementedException();
+            Contexto.Update(obj);
+            Contexto.SaveChanges();
         }
     }
 }
