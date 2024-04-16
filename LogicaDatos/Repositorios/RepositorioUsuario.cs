@@ -55,5 +55,10 @@ namespace LogicaDatos.Repositorios
             Contexto.Update(obj);
             Contexto.SaveChanges();
         }
+
+        public Usuario Login(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
