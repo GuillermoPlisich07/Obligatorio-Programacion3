@@ -58,7 +58,7 @@ namespace LogicaDatos.Repositorios
 
         public Usuario Login(string email, string password)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }
