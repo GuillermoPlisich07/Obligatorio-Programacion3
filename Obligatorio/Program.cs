@@ -31,6 +31,12 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUModificar<Linea>, CUModificarLinea>();
             builder.Services.AddScoped<ICUModificar<Usuario>, CUModificarUsuario>();
 
+            builder.Services.AddScoped<IRepositorioArticulo, RepositorioArticulo>();
+            builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
+            builder.Services.AddScoped<IRepositorioLinea, RepositorioLinea>();
+            builder.Services.AddScoped<IRepositorioPedido, RepositorioPedido>();
+            builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+
             builder.Services.AddDbContext<LibreriaContext>();
 
             WebApplication app = builder.Build();

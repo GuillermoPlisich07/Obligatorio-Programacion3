@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Dominio
 {
-    [Table("Clientes")]
+    [Table("Cliente")]
     public class Cliente
     {
         public int id { get; set; }
