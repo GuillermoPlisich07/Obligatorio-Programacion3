@@ -12,7 +12,7 @@ namespace LogicaNegocio.Dominio
     public class PedidoComun : Pedido 
     {
         [Required(ErrorMessage = "La distancia es obligatoria para los pedidos comunes")]
-        [Column("distancia")]
+        [Column("distancia", TypeName = "decimal(18, 2)")]
         public decimal distancia { get; set; }
 
     }

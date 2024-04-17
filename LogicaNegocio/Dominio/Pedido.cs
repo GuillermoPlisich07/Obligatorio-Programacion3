@@ -26,13 +26,13 @@ namespace LogicaNegocio.Dominio
         [Required(ErrorMessage = "Debe haber al menos una línea de pedido")]
         public List<Linea> lineas { get; set; }
 
-        [Column("total")]
+        [Column("total", TypeName = "decimal(18, 2)")]
         public decimal total { get; set; }
 
-        [Column("IVA")]
+        [Column("IVA", TypeName = "decimal(18, 2)")]
         public decimal IVA { get; set; }
 
-        [Column("recargo")]
+        [Column("recargo", TypeName = "decimal(18, 2)")]
         public decimal recarga { get; set; }
 
         [Column("fechaPrometida")]
