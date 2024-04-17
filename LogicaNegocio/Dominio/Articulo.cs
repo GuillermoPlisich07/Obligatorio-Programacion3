@@ -30,8 +30,8 @@ namespace LogicaNegocio.Dominio
         [Column("codigoProveedor")]
         public int codigoProveedor { get; set; }
 
-        [Column("precioPublico")]
-        public PrecioArticulo precioPublico { get; set; }
+        [Column("precioPublico", TypeName = "decimal(18, 2)")]
+        public decimal precioPublico { get; set; }
 
         [Column("stock")]
         public int stock { get; set; }

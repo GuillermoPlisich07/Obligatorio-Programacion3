@@ -12,7 +12,7 @@ namespace LogicaNegocio.Dominio
     public class PedidoExpress : Pedido
     {
         [Range(1, 5, ErrorMessage = "El plazo de entrega debe estar entre 1 y 5 días")]
-        [Column("plazoDias")]
+        [Column("plazoDias", TypeName = "decimal(18, 2)")]
         public int plazoDias { get; set; }
     }
 }
