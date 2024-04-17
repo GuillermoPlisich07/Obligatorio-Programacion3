@@ -2,6 +2,7 @@ using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCU;
 using LogicaDatos.Repositorios;
 using LogicaNegocio.Dominio;
+using LogicaNegocio.InterfacesRepositorios;
 
 namespace Obligatorio
 {
@@ -32,7 +33,7 @@ namespace Obligatorio
 
             builder.Services.AddDbContext<LibreriaContext>();
 
-            var app = builder.Build();
+            WebApplication app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

@@ -19,13 +19,13 @@ namespace LogicaDatos.Repositorios
         public DbSet<PrecioArticulo> PreciosArticulos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            //ACÁ ES DONDE PONDRÍAMOS NUESTRO CÓDIGO DE "FLUENT API" PARA CONFIGURAR
-            //COSAS DE NUESTRO MODELO DE ENTIDES QUE PUEDEN TENER IMPACTO A NIVEL DE LA BD (ESQUEMAS)
-            //SUSTITUYE O COMPLEMENTA LAS DATA ANNOTATIONS
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+        //    //ACÁ ES DONDE PONDRÍAMOS NUESTRO CÓDIGO DE "FLUENT API" PARA CONFIGURAR
+        //    //COSAS DE NUESTRO MODELO DE ENTIDES QUE PUEDEN TENER IMPACTO A NIVEL DE LA BD (ESQUEMAS)
+        //    //SUSTITUYE O COMPLEMENTA LAS DATA ANNOTATIONS
+        //}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
