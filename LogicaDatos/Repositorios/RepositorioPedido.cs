@@ -21,7 +21,6 @@ namespace LogicaDatos.Repositorios
         {
             if (item != null)
             {
-                item.Validar();
                 Contexto.Pedidos.Add(item);
                 Contexto.SaveChanges(); // Aca es el alta en EF
             }
@@ -51,7 +50,6 @@ namespace LogicaDatos.Repositorios
 
         public void Update(Pedido obj)
         {
-            obj.Validar();
             Contexto.Update(obj);
             Contexto.SaveChanges();
         }

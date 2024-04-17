@@ -21,7 +21,6 @@ namespace LogicaDatos.Repositorios
         {
             if (item != null)
             {
-                item.Validar();
                 Contexto.Clientes.Add(item);
                 Contexto.SaveChanges(); // Aca es el alta en EF
             }
