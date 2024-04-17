@@ -1,5 +1,6 @@
 using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCU;
+using LogicaDatos.Repositorios;
 using LogicaNegocio.Dominio;
 
 namespace Obligatorio
@@ -29,6 +30,7 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUModificar<Linea>, CUModificarLinea>();
             builder.Services.AddScoped<ICUModificar<Usuario>, CUModificarUsuario>();
 
+            builder.Services.AddDbContext<LibreriaContext>();
 
             var app = builder.Build();
 
