@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using LogicaAplicacion.CasosUso;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,18 +12,21 @@ namespace Obligatorio.Controllers
         public ICUAlta<Usuario> CUAltaUsuario { get; set; }
         public ICUBaja CUBajaUsuario { get; set; }
         public ICUModificar<Usuario> CUModificarUsuario { get; set; }
+        public ICUListado<Usuario> CUListadoUsuario { get; set; }
 
-        public UsuarioController(ICUAlta<Usuario> cuAltaUsuario, ICUBaja cuBajaUsuario, ICUModificar<Usuario> cuModificarUsuario)
+        public UsuarioController(ICUAlta<Usuario> cuAltaUsuario, ICUBaja cuBajaUsuario, ICUModificar<Usuario> cuModificarUsuario, ICUListado<Usuario> cUListadoUsuario)
         {
             CUAltaUsuario = cuAltaUsuario;
             CUBajaUsuario = cuBajaUsuario;
             CUModificarUsuario = cuModificarUsuario;
+            CUListadoUsuario = cUListadoUsuario;
         }
 
         // GET: UsuarioController
         public ActionResult Index()
         {
-            return View();
+            List<Usuario> usuarios = CUListadoUsuario.ObtenerListado();
+            return View(usuarios);
         }
 
         // GET: UsuarioController/Details/5

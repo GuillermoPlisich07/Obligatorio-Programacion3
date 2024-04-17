@@ -16,7 +16,6 @@ namespace LogicaDatos.Repositorios
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<PedidoComun> PedidoComunes { get; set; }
         public DbSet<PedidoExpress> PedidosExpress { get; set; }
-        public DbSet<PrecioArticulo> PreciosArticulos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
