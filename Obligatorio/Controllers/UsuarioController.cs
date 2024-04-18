@@ -2,10 +2,10 @@
 using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Mvc;
+using Obligatorio.Filtros;
 
 namespace Obligatorio.Controllers
 {
-
     public class UsuarioController : Controller
     {
 
@@ -23,6 +23,7 @@ namespace Obligatorio.Controllers
         }
 
         // GET: UsuarioController
+        [User]
         public ActionResult Index()
         {
             List<Usuario> usuarios = CUListadoUsuario.ObtenerListado();
