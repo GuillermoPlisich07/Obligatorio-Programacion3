@@ -21,7 +21,7 @@ namespace LogicaDatos.Repositorios
         {
             if (nuevo != null)
             {
-                nuevo.Validar();
+                nuevo.EncriptarPassword();
                 Contexto.Usuarios.Add(nuevo);
                 Contexto.SaveChanges(); // Aca es el alta en EF
             }
