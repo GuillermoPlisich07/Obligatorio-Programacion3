@@ -1,28 +1,37 @@
-﻿using LogicaDatos.Repositorios;
+﻿using LogicaAplicacion.CasosUso;
+using LogicaAplicacion.InterfacesCU;
+using LogicaDatos.Repositorios;
 using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace Obligatorio.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly LibreriaContext ctx;
+        //private readonly LibreriaContext ctx;
 
-        public LoginController(LibreriaContext context)
+        //public LoginController(LibreriaContext context)
+        //{
+        //    ctx = context;
+        //}
+        public ICULogin<Usuario> CULoginUsuario { get; set; }
+
+        public LoginController(ICULogin<Usuario> cuLoginUsuario)
         {
-            ctx = context;
+            CULoginUsuario = cuLoginUsuario;
         }
 
-        public IActionResult Index()
+        public IActionResult login()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index(string nombreUsuario, string contraseña)
+        public IActionResult login(string Email, string Password)
         {
-            var usuario = ctx.Usuarios.FirstOrDefault(u => u.nombre == nombreUsuario && u.password == contraseña);
+            var usuario = CULoginUsuario.loguearse(Email, Password);
 
             if (usuario != null)
             {

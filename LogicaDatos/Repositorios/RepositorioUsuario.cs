@@ -60,15 +60,16 @@ namespace LogicaDatos.Repositorios
         {
             Usuario user = FindByEmail(email);
 
-            if (user!=null)
+            //if (user!=null && user.VerificarPassword(password))
+            //{
+            //    return user;
+            //}
+            if (user != null && user.passwordHash==password)
             {
-                if (user.VerificarPassword(password))
-                {
-                    return user;
-                }
+                return user;
             }
 
-            return user;
+            return null;
         }
 
         public Usuario FindByEmail(string email)

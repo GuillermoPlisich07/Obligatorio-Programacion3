@@ -27,9 +27,11 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUBuscarPorId<Cliente>, CUBuscarCliente>();
             builder.Services.AddScoped<ICUListado<Articulo>, CUListadoArticulo>();
             builder.Services.AddScoped<ICUListado<Pedido>, CUListadoPedido>();
+            builder.Services.AddScoped<ICUListado<Usuario>, CUListadoUsuario>();
             builder.Services.AddScoped<ICUModificar<Cliente>, CUModificarCliente>();
             builder.Services.AddScoped<ICUModificar<Linea>, CUModificarLinea>();
             builder.Services.AddScoped<ICUModificar<Usuario>, CUModificarUsuario>();
+            builder.Services.AddScoped<ICULogin<Usuario>, CULoginUsuario>();
 
             builder.Services.AddScoped<IRepositorioArticulo, RepositorioArticulo>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
@@ -39,6 +41,9 @@ namespace Obligatorio
 
             builder.Services.AddDbContext<LibreriaContext>();
 
+            // le inyecto al proyecto el uso de session
+            builder.Services.AddSession();
+
             WebApplication app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -46,15 +51,18 @@ namespace Obligatorio
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Usuario}/{action=Index}/{id?}");
+                pattern: "{controller=Login}/{action=login}/{id?}");
 
             app.Run();
         }
