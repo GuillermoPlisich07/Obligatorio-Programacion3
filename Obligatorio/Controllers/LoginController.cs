@@ -24,6 +24,8 @@ namespace Obligatorio.Controllers
             CULoginUsuario = cuLoginUsuario;
         }
 
+
+
         public IActionResult login()
         {
             return View();
@@ -55,5 +57,8 @@ namespace Obligatorio.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("login","Login");
         }
+
+
+
     }
 }
