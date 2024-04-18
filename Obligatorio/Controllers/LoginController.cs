@@ -1,22 +1,14 @@
-﻿using LogicaAplicacion.CasosUso;
-using LogicaAplicacion.InterfacesCU;
-using LogicaDatos.Repositorios;
+﻿using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using Obligatorio.Filtros;
 
 namespace Obligatorio.Controllers
 {
     public class LoginController : Controller
     {
-        //private readonly LibreriaContext ctx;
-
-        //public LoginController(LibreriaContext context)
-        //{
-        //    ctx = context;
-        //}
+        
         public ICULogin<Usuario> CULoginUsuario { get; set; }
 
         public LoginController(ICULogin<Usuario> cuLoginUsuario)
@@ -38,9 +30,12 @@ namespace Obligatorio.Controllers
 
             if (usuario != null)
             {
-                HttpContext.Session.SetString("Nombre", usuario.nombre);
-                HttpContext.Session.SetString("Apellido", usuario.apellido);
-                HttpContext.Session.SetString("Email", usuario.email);
+                string nombre = usuario.nombre;
+                string apellido = usuario.apellido;
+                string email = usuario.email;
+                HttpContext.Session.SetString("Nombre", nombre);
+                HttpContext.Session.SetString("Apellido", apellido);
+                HttpContext.Session.SetString("Email", email);
                 // Usuario autenticado, redirige a la página principal
                 return RedirectToAction("Index", "Home");
             }
