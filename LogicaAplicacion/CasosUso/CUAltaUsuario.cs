@@ -18,9 +18,9 @@ namespace LogicaAplicacion.CasosUso
             Repo = repo;
         }
 
-        public void Alta(Usuario value)
+        public void Alta(Usuario nuevo)
         {
-            throw new NotImplementedException();
+            Repo.Add(nuevo);
         }
     }
 }

@@ -21,9 +21,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.apellido)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.passwordHash)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -40,11 +37,7 @@
                 @Html.DisplayFor(modelItem => item.apellido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.passwordHash)
-            </td>
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
             </td>
         </tr>

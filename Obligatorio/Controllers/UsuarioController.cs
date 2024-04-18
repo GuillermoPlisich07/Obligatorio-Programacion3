@@ -1,6 +1,7 @@
 ﻿using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
+using LogicaNegocio.ExcepcionesDominio;
 using Microsoft.AspNetCore.Mvc;
 using Obligatorio.Filtros;
 
@@ -45,16 +46,23 @@ namespace Obligatorio.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Usuario nuevo)
         {
             try
             {
+                CUAltaUsuario.Alta(nuevo);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (DatosInvalidosException ex)
             {
-                return View();
+                ViewBag.Mensaje = ex.Message;
             }
+            catch (Exception ex)
+            {
+                ViewBag.Mensaje = "Ocurrió un error inesperado. No se hizo el alta del usuario";
+            }
+
+            return View(nuevo);
         }
 
         // GET: UsuarioController/Edit/5
