@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Obligatorio.Filtros;
 using Obligatorio.Models;
 using System.Diagnostics;
 
@@ -12,7 +13,7 @@ namespace Obligatorio.Controllers
         {
             _logger = logger;
         }
-
+        [User]
         public IActionResult Index()
         {
             return View();

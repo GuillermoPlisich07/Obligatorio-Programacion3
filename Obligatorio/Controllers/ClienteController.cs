@@ -2,6 +2,7 @@
 using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Obligatorio.Filtros;
 
 namespace Obligatorio.Controllers
 {
@@ -19,7 +20,7 @@ namespace Obligatorio.Controllers
             CUAltaCliente = cUAltaCliente;
             CUBuscarCliente = cUBuscarCliente;
         }
-
+        [User]
         // GET: ClienteController
         public ActionResult Index()
         {

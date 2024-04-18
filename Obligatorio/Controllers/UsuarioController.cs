@@ -1,6 +1,7 @@
 ﻿using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
+using LogicaNegocio.ExcepcionesDominio;
 using Microsoft.AspNetCore.Mvc;
 using Obligatorio.Filtros;
 
@@ -13,13 +14,16 @@ namespace Obligatorio.Controllers
         public ICUBaja CUBajaUsuario { get; set; }
         public ICUModificar<Usuario> CUModificarUsuario { get; set; }
         public ICUListado<Usuario> CUListadoUsuario { get; set; }
+        public ICUBuscarPorId<Usuario> CUBuscarUsuario { get; set; }
 
-        public UsuarioController(ICUAlta<Usuario> cuAltaUsuario, ICUBaja cuBajaUsuario, ICUModificar<Usuario> cuModificarUsuario, ICUListado<Usuario> cUListadoUsuario)
+
+        public UsuarioController(ICUAlta<Usuario> cuAltaUsuario, ICUBaja cuBajaUsuario, ICUModificar<Usuario> cuModificarUsuario, ICUListado<Usuario> cUListadoUsuario, ICUBuscarPorId<Usuario> cUBuscarUsuario)
         {
             CUAltaUsuario = cuAltaUsuario;
             CUBajaUsuario = cuBajaUsuario;
             CUModificarUsuario = cuModificarUsuario;
             CUListadoUsuario = cUListadoUsuario;
+            CUBuscarUsuario = cUBuscarUsuario;
         }
 
         // GET: UsuarioController
@@ -60,22 +64,32 @@ namespace Obligatorio.Controllers
         // GET: UsuarioController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Usuario user = CUBuscarUsuario.Buscar(id);
+            return View(user);
         }
 
         // POST: UsuarioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Usuario user)
         {
             try
             {
+                user.id = id;
+                CUModificarUsuario.Modificar(user);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (DatosInvalidosException e)
             {
-                return View();
+                ViewBag.Mensaje = e.Message;
+
             }
+            catch (Exception)
+            {
+                ViewBag.Mensaje = "Ocurrió un error, no se pudo realizar la modificación";
+            }
+
+            return View();
         }
 
         // GET: UsuarioController/Delete/5

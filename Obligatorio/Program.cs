@@ -32,6 +32,7 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUModificar<Linea>, CUModificarLinea>();
             builder.Services.AddScoped<ICUModificar<Usuario>, CUModificarUsuario>();
             builder.Services.AddScoped<ICULogin<Usuario>, CULoginUsuario>();
+            builder.Services.AddScoped<ICUBuscarPorId<Usuario>, CUBuscarUsuario>();
 
             builder.Services.AddScoped<IRepositorioArticulo, RepositorioArticulo>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();

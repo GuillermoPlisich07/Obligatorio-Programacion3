@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUModificarUsuario : ICUModificar<Usuario>
+    public class CUBuscarUsuario : ICUBuscarPorId<Usuario>
     {
         public IRepositorioUsuario Repo { get; set; }
 
-        public CUModificarUsuario(IRepositorioUsuario repo)
+        public CUBuscarUsuario(IRepositorioUsuario repo)
         {
             Repo = repo;
         }
 
-        public void Modificar(Usuario t)
+        public Usuario Buscar(int id)
         {
-            Repo.Update(t);
+            return Repo.FindById(id);
         }
     }
 }
