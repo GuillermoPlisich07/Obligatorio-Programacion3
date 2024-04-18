@@ -1,0 +1,23 @@
+﻿@model IEnumerable<LogicaNegocio.Dominio.Cliente>
+
+@{
+    ViewData["Title"] = "BusquedaClientes";
+}
+
+<h1>BUSCAR PEDIDOS DE CLIENTES POR NOMBRE/APELLIDO O MONTO.</h1>
+<br />
+<form action="@Url.Action("Search", "Home")" method="GET">
+    <label form="NombreCliente">Ingrese Nombre/Apellido</label>
+    <input type="text" name="NombreCliente">
+    <br />
+    <label form="Monto">Ingrese el Monto</label>
+    <input type="number" name="Monto">
+    <br />
+    <button type="submit">Buscar</button>
+</form>
+<br />
+<table class="tablaBusqueda">
+    <thead>
+    </thead>
+</table>
+

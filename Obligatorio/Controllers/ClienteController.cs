@@ -32,6 +32,12 @@ namespace Obligatorio.Controllers
             return View();
         }
 
+        public ActionResult BusquedaClientes(string BusquedaClientes)
+        {
+            return View();
+        }
+ 
+
         // GET: ClienteController/Create
         public ActionResult Create()
         {
@@ -94,5 +100,14 @@ namespace Obligatorio.Controllers
                 return View();
             }
         }
+
+
+        [HttpPost]
+        public ActionResult BusquedaClientes(string BusquedaClientes, IFormCollection collection)
+        {
+            return View();
+        }
+
+
     }
 }
