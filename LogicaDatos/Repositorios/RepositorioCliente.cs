@@ -1,5 +1,6 @@
 ﻿using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,19 @@ namespace LogicaDatos.Repositorios
             Contexto.SaveChanges();
         }
 
+        public List<Cliente> FindByRutOrMonto(string rut, string razonSocial, decimal monto)
+        {
+            return Contexto.Clientes
+                    .Join(Contexto.Pedidos,
+                          cliente => cliente.id,
+                          pedido => pedido.cliente.id,
+                          (cliente, pedido) => new { Cliente = cliente, Pedido = pedido })
+                    .Where(cp => rut == null || cp.Cliente.RUT == int.Parse(rut))
+                    .Where(cp => rut == razonSocial || cp.Cliente.razonSocial == razonSocial)
+                    .Where(cp => monto == null || cp.Pedido.total >= monto)
+                    .Select(cp => cp.Cliente)
+                    .ToList();
+        }
 
     }
 }

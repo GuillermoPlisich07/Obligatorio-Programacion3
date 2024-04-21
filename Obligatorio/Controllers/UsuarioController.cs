@@ -102,16 +102,18 @@ namespace Obligatorio.Controllers
         // GET: UsuarioController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Usuario t = CUBuscarUsuario.Buscar(id);
+            return View(t);
         }
 
         // POST: UsuarioController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Usuario t)
         {
             try
             {
+                CUBajaUsuario.Baja(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

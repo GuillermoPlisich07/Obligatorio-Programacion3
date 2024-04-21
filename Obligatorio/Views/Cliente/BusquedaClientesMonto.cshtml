@@ -1,0 +1,80 @@
+﻿@model IEnumerable<LogicaNegocio.Dominio.Cliente>
+
+@{
+    ViewData["Title"] = "Busqueda Clientes Monto";
+}
+
+<h1>BusquedaClientesMonto</h1>
+<span>@ViewBag.Mensaje</span>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BusquedaClientesMonto">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label form="rut">Ingrese el RUT del Cliente</label>
+                <input type="text" name="rut">
+            </div>
+            <div class="form-group">
+                <label form="razonSocial">Ingrese la Razon Social</label>
+                <input type="text" name="razonSocial">
+            </div>
+            <div class="form-group">
+                <label form="Monto">Ingrese el Monto</label>
+                <input type="number" name="monto">
+            </div>
+            <div class="form-group">
+                <button type="submit">Buscar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.razonSocial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RUT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ciudad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.numPuerta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.calle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.distancia)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.razonSocial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RUT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ciudad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.numPuerta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.calle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.distancia)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

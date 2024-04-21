@@ -33,6 +33,8 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUModificar<Usuario>, CUModificarUsuario>();
             builder.Services.AddScoped<ICULogin<Usuario>, CULoginUsuario>();
             builder.Services.AddScoped<ICUBuscarPorId<Usuario>, CUBuscarUsuario>();
+            builder.Services.AddScoped<ICUListado<Cliente>, CUListadoCliente>();
+            builder.Services.AddScoped<ICUBuscarRutOMonto<Cliente>, CUBusquedaClientesMonto>();
 
             builder.Services.AddScoped<IRepositorioArticulo, RepositorioArticulo>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();

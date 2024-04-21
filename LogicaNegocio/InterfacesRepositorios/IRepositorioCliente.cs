@@ -9,5 +9,6 @@ namespace LogicaNegocio.InterfacesRepositorios
 {
     public interface IRepositorioCliente : IRepositorio<Cliente>
     {
+        List<Cliente> FindByRutOrMonto(string rut, string razonSocial,decimal monto);
     }
 }

@@ -12,5 +12,6 @@ namespace LogicaNegocio.InterfacesRepositorios
         Usuario Login(string email, string password);
 
         Usuario FindByEmail(string email);
+
     }
 }

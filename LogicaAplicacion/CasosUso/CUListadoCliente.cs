@@ -1,4 +1,5 @@
 ﻿using LogicaAplicacion.InterfacesCU;
+using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
@@ -8,18 +9,19 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUBajaUsuario : ICUBaja
+    public class CUListadoCliente : ICUListado<Cliente>
     {
-        public IRepositorioUsuario Repo { get; set; }
+        
+        public IRepositorioCliente Repo { get; set; }
 
-        public CUBajaUsuario(IRepositorioUsuario repo)
+        public CUListadoCliente(IRepositorioCliente repo)
         {
             Repo = repo;
         }
 
-        public void Baja(int id)
+        public List<Cliente> ObtenerListado()
         {
-            Repo.Remove(id);
+            return Repo.FindAll();
         }
     }
 }

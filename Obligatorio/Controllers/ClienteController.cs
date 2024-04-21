@@ -1,4 +1,5 @@
 ﻿using LogicaAplicacion.InterfacesCU;
+using LogicaDatos.Migrations;
 using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,19 @@ namespace Obligatorio.Controllers
         public ICUBaja CUBajaCliente { get; set; }
         public ICUAlta<Cliente> CUAltaCliente { get; set; }
         public ICUBuscarPorId<Cliente> CUBuscarCliente { get; set; } 
+        public ICUBuscarRutOMonto<Cliente> CUBuscarRutOMonto { get; set; } 
 
-        public ClienteController(ICUModificar<Cliente> cUModificarCliente, ICUBaja cUBajaCliente, ICUAlta<Cliente> cUAltaCliente, ICUBuscarPorId<Cliente> cUBuscarCliente)
+        public ICUListado<Cliente> CUListadoCliente { get; set; }
+
+        public ClienteController(ICUModificar<Cliente> cUModificarCliente, ICUBaja cUBajaCliente, ICUAlta<Cliente> cUAltaCliente, 
+                                ICUBuscarPorId<Cliente> cUBuscarCliente, ICUListado<Cliente> cUListadoCliente, ICUBuscarRutOMonto<Cliente> cUBuscarRutOMonto)
         {
             CUModificarCliente = cUModificarCliente;
             CUBajaCliente = cUBajaCliente;
             CUAltaCliente = cUAltaCliente;
             CUBuscarCliente = cUBuscarCliente;
+            CUListadoCliente = cUListadoCliente;
+            CUBuscarRutOMonto = cUBuscarRutOMonto;
         }
         [User]
         // GET: ClienteController
@@ -33,11 +40,29 @@ namespace Obligatorio.Controllers
             return View();
         }
 
-        public ActionResult BusquedaClientes(string BusquedaClientes)
+        public ActionResult BusquedaClientesMonto()
         {
+            List<Cliente> temas = CUListadoCliente.ObtenerListado();
+            return View(temas);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BusquedaClientesMonto(string rut, string razonSocial, int monto)
+        {
+            try
+            {
+                List<Cliente> temas = CUBuscarRutOMonto.Buscar(rut, razonSocial,monto);
+                return View(temas);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Mensaje = "Ocurrió un error inesperado";
+            }
+
             return View();
         }
- 
+
 
         // GET: ClienteController/Create
         public ActionResult Create()
