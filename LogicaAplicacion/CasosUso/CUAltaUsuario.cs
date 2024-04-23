@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using DTOs;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUAltaUsuario : ICUAlta<Usuario>
+    public class CUAltaUsuario : ICUAlta<DTOUsuario>
     {
         public IRepositorioUsuario Repo { get; set; }
 
@@ -18,9 +19,9 @@ namespace LogicaAplicacion.CasosUso
             Repo = repo;
         }
 
-        public void Alta(Usuario nuevo)
+        public void Alta(DTOUsuario nuevo)
         {
-            Repo.Add(nuevo);
+            Repo.Add(MapperUsuario.ToUsuario(nuevo));
         }
     }
 }

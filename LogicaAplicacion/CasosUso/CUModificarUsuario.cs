@@ -1,5 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCU;
-using LogicaNegocio.Dominio;
+﻿using DTOs;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUModificarUsuario : ICUModificar<Usuario>
+    public class CUModificarUsuario : ICUModificar<DTOUsuario>
     {
         public IRepositorioUsuario Repo { get; set; }
 
@@ -18,9 +18,9 @@ namespace LogicaAplicacion.CasosUso
             Repo = repo;
         }
 
-        public void Modificar(Usuario t)
+        public void Modificar(DTOUsuario t)
         {
-            Repo.Update(t);
+            Repo.Update(MapperUsuario.ToUsuario(t));
         }
     }
 }

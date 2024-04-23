@@ -1,5 +1,6 @@
 ﻿using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,9 +52,21 @@ namespace LogicaDatos.Repositorios
 
         public void Update(Usuario obj)
         {
-            obj.Validar();
-            Contexto.Update(obj);
+            // Verificar si el campo passwordHash no es vacio y no es nulo
+            if (!string.IsNullOrEmpty(obj.passwordHash))
+            {
+                // Actualizar todos los campos excepto passwordHash
+                Contexto.Entry(obj).State = EntityState.Modified;
+                Contexto.Entry(obj).Property(u => u.passwordHash).IsModified = false;
+            }
+            // Si passwordHash es nulo, ignorar completamente la propiedad
+            else
+            {
+                Contexto.Entry(obj).State = EntityState.Modified;
+                Contexto.Entry(obj).Property(u => u.passwordHash).IsModified = false;
+            }
             Contexto.SaveChanges();
+            
         }
 
         public Usuario Login(string email, string password)

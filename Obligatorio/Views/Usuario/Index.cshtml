@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LogicaNegocio.Dominio.Usuario>
+﻿@model IEnumerable<DTOs.DTOUsuario>
 
 @{
     ViewData["Title"] = "Index";
@@ -37,8 +37,8 @@
                 @Html.DisplayFor(modelItem => item.apellido)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

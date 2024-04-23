@@ -1,3 +1,4 @@
+using DTOs;
 using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCU;
 using LogicaDatos.Repositorios;
@@ -19,7 +20,7 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUAlta<Cliente>, CUAltaCliente>();
             builder.Services.AddScoped<ICUAlta<Linea>, CUAltaLinea>();
             builder.Services.AddScoped<ICUAlta<Pedido>, CUAltaPedido>();
-            builder.Services.AddScoped<ICUAlta<Usuario>, CUAltaUsuario>();
+            builder.Services.AddScoped<ICUAlta<DTOUsuario>, CUAltaUsuario>();
             builder.Services.AddScoped<ICUBaja, CUBajaCliente>();
             builder.Services.AddScoped<ICUBaja, CUBajaLinea>();
             builder.Services.AddScoped<ICUBaja, CUBajaPedido>();
@@ -27,12 +28,12 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUBuscarPorId<Cliente>, CUBuscarCliente>();
             builder.Services.AddScoped<ICUListado<Articulo>, CUListadoArticulo>();
             builder.Services.AddScoped<ICUListado<Pedido>, CUListadoPedido>();
-            builder.Services.AddScoped<ICUListado<Usuario>, CUListadoUsuario>();
+            builder.Services.AddScoped<ICUListado<DTOUsuario>, CUListadoUsuario>();
             builder.Services.AddScoped<ICUModificar<Cliente>, CUModificarCliente>();
             builder.Services.AddScoped<ICUModificar<Linea>, CUModificarLinea>();
-            builder.Services.AddScoped<ICUModificar<Usuario>, CUModificarUsuario>();
+            builder.Services.AddScoped<ICUModificar<DTOUsuario>, CUModificarUsuario>();
             builder.Services.AddScoped<ICULogin<Usuario>, CULoginUsuario>();
-            builder.Services.AddScoped<ICUBuscarPorId<Usuario>, CUBuscarUsuario>();
+            builder.Services.AddScoped<ICUBuscarPorId<DTOUsuario>, CUBuscarUsuario>();
             builder.Services.AddScoped<ICUListado<Cliente>, CUListadoCliente>();
             builder.Services.AddScoped<ICUBuscarRutOMonto<Cliente>, CUBusquedaClientesMonto>();
 

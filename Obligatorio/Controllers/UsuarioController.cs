@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.CasosUso;
+﻿using DTOs;
+using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.ExcepcionesDominio;
@@ -10,14 +11,14 @@ namespace Obligatorio.Controllers
     public class UsuarioController : Controller
     {
 
-        public ICUAlta<Usuario> CUAltaUsuario { get; set; }
+        public ICUAlta<DTOUsuario> CUAltaUsuario { get; set; }
         public ICUBaja CUBajaUsuario { get; set; }
-        public ICUModificar<Usuario> CUModificarUsuario { get; set; }
-        public ICUListado<Usuario> CUListadoUsuario { get; set; }
-        public ICUBuscarPorId<Usuario> CUBuscarUsuario { get; set; }
+        public ICUModificar<DTOUsuario> CUModificarUsuario { get; set; }
+        public ICUListado<DTOUsuario> CUListadoUsuario { get; set; }
+        public ICUBuscarPorId<DTOUsuario> CUBuscarUsuario { get; set; }
 
 
-        public UsuarioController(ICUAlta<Usuario> cuAltaUsuario, ICUBaja cuBajaUsuario, ICUModificar<Usuario> cuModificarUsuario, ICUListado<Usuario> cUListadoUsuario, ICUBuscarPorId<Usuario> cUBuscarUsuario)
+        public UsuarioController(ICUAlta<DTOUsuario> cuAltaUsuario, ICUBaja cuBajaUsuario, ICUModificar<DTOUsuario> cuModificarUsuario, ICUListado<DTOUsuario> cUListadoUsuario, ICUBuscarPorId<DTOUsuario> cUBuscarUsuario)
         {
             CUAltaUsuario = cuAltaUsuario;
             CUBajaUsuario = cuBajaUsuario;
@@ -30,7 +31,7 @@ namespace Obligatorio.Controllers
         [User]
         public ActionResult Index()
         {
-            List<Usuario> usuarios = CUListadoUsuario.ObtenerListado();
+            List<DTOUsuario> usuarios = CUListadoUsuario.ObtenerListado();
             return View(usuarios);
         }
 
@@ -49,7 +50,7 @@ namespace Obligatorio.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Usuario nuevo)
+        public ActionResult Create(DTOUsuario nuevo)
         {
             try
             {
@@ -71,18 +72,18 @@ namespace Obligatorio.Controllers
         // GET: UsuarioController/Edit/5
         public ActionResult Edit(int id)
         {
-            Usuario user = CUBuscarUsuario.Buscar(id);
+            DTOUsuario user = CUBuscarUsuario.Buscar(id);
             return View(user);
         }
 
         // POST: UsuarioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Usuario user)
+        public ActionResult Edit(int id, DTOUsuario user)
         {
             try
             {
-                user.id = id;
+                user.Id = id;
                 CUModificarUsuario.Modificar(user);
                 return RedirectToAction(nameof(Index));
             }
@@ -102,14 +103,14 @@ namespace Obligatorio.Controllers
         // GET: UsuarioController/Delete/5
         public ActionResult Delete(int id)
         {
-            Usuario t = CUBuscarUsuario.Buscar(id);
+            DTOUsuario t = CUBuscarUsuario.Buscar(id);
             return View(t);
         }
 
         // POST: UsuarioController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Usuario t)
+        public ActionResult Delete(int id, DTOUsuario t)
         {
             try
             {

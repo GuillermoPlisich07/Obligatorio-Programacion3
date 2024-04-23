@@ -1,4 +1,4 @@
-﻿@model LogicaNegocio.Dominio.Usuario
+﻿@model DTOs.DTOUsuario
 
 @{
     ViewData["Title"] = "Delete";
@@ -29,16 +29,10 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.apellido)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.passwordHash)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.passwordHash)
-        </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="id" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
