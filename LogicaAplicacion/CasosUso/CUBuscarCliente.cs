@@ -20,6 +20,7 @@ namespace LogicaAplicacion.CasosUso
         }
         public DTOCliente Buscar(int id)
         {
+            List<Cliente> clientes = Repo.FindAll();
             return MapperCliente.ToDTOCliente(Repo.FindById(id));
         }
     }
