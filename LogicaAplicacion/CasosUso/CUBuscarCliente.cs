@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using DTOs;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUBuscarCliente : ICUBuscarPorId<Cliente>
+    public class CUBuscarCliente : ICUBuscarPorId<DTOCliente>
     {
         public IRepositorioCliente Repo { get; set; }
 
@@ -17,9 +18,9 @@ namespace LogicaAplicacion.CasosUso
         {
             Repo = repo;
         }
-        public Cliente Buscar(int id)
+        public DTOCliente Buscar(int id)
         {
-            throw new NotImplementedException();
+            return MapperCliente.ToDTOCliente(Repo.FindById(id));
         }
     }
 }
