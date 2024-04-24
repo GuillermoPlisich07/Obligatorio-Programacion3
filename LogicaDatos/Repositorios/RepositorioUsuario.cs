@@ -52,19 +52,19 @@ namespace LogicaDatos.Repositorios
 
         public void Update(Usuario obj)
         {
-            // Verificar si el campo passwordHash no es vacio y no es nulo
-            if (!string.IsNullOrEmpty(obj.passwordHash))
+            // Verificar si el campo passwordHash si es vacio y es nulo
+            if (string.IsNullOrEmpty(obj.passwordHash))
             {
                 // Actualizar todos los campos excepto passwordHash
                 Contexto.Entry(obj).State = EntityState.Modified;
                 Contexto.Entry(obj).Property(u => u.passwordHash).IsModified = false;
             }
-            // Si passwordHash es nulo, ignorar completamente la propiedad
+            
             else
             {
-                Contexto.Entry(obj).State = EntityState.Modified;
-                Contexto.Entry(obj).Property(u => u.passwordHash).IsModified = false;
+                Contexto.Usuarios.Update(obj);
             }
+            
             Contexto.SaveChanges();
             
         }

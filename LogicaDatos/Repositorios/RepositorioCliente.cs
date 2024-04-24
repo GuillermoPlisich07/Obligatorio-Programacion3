@@ -1,6 +1,7 @@
 ﻿using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,16 +58,29 @@ namespace LogicaDatos.Repositorios
 
         public List<Cliente> FindByRutOrMonto(string rut, string razonSocial, decimal monto)
         {
-            return Contexto.Clientes
+            var query = Contexto.Clientes
                     .Join(Contexto.Pedidos,
                           cliente => cliente.id,
                           pedido => pedido.cliente.id,
-                          (cliente, pedido) => new { Cliente = cliente, Pedido = pedido })
-                    .Where(cp => rut == null || cp.Cliente.RUT == int.Parse(rut))
-                    .Where(cp => rut == razonSocial || cp.Cliente.razonSocial == razonSocial)
-                    .Where(cp => monto == null || cp.Pedido.total >= monto)
-                    .Select(cp => cp.Cliente)
-                    .ToList();
+                          (cliente, pedido) => new { Cliente = cliente, Pedido = pedido });
+
+            if (!string.IsNullOrEmpty(rut))
+            {
+                int rutValue = int.Parse(rut);
+                query = query.Where(cp => cp.Cliente.RUT == rutValue);
+            }
+
+            if (!string.IsNullOrEmpty(razonSocial))
+            {
+                query = query.Where(cp => cp.Cliente.razonSocial == razonSocial);
+            }
+
+            if (monto != null)
+            {
+                query = query.Where(cp => cp.Pedido.total >= monto);
+            }
+
+            return query.GroupBy(cp => cp.Cliente).Select(cp => cp.Key).ToList();
         }
 
     }
