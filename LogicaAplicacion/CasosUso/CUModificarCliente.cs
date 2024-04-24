@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using DTOs;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUModificarCliente : ICUModificar<Cliente>
+    public class CUModificarCliente : ICUModificar<DTOCliente>
     {
         public IRepositorioCliente Repo { get; set; }
 
@@ -18,9 +19,9 @@ namespace LogicaAplicacion.CasosUso
             Repo = repo;
         }
 
-        public void Modificar(Cliente t)
+        public void Modificar(DTOCliente t)
         {
-            throw new NotImplementedException();
+            Repo.Update(MapperCliente.ToCliente(t));
         }
     }
 }

@@ -12,5 +12,6 @@ namespace DTOs
         public int id { get; set; }
         public string razonSocial { get; set; }
         public int RUT { get; set; }
+        public int 
     }
 }

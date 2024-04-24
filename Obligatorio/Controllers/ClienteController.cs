@@ -1,6 +1,9 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using DTOs;
+using LogicaAplicacion.CasosUso;
+using LogicaAplicacion.InterfacesCU;
 using LogicaDatos.Migrations;
 using LogicaNegocio.Dominio;
+using LogicaNegocio.ExcepcionesDominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Obligatorio.Filtros;
@@ -9,16 +12,16 @@ namespace Obligatorio.Controllers
 {
     public class ClienteController : Controller
     {
-        public ICUModificar<Cliente> CUModificarCliente { get; set; }
+        public ICUModificar<DTOCliente> CUModificarCliente { get; set; }
         public ICUBaja CUBajaCliente { get; set; }
-        public ICUAlta<Cliente> CUAltaCliente { get; set; }
-        public ICUBuscarPorId<Cliente> CUBuscarCliente { get; set; } 
-        public ICUBuscarRutOMonto<Cliente> CUBuscarRutOMonto { get; set; } 
+        public ICUAlta<DTOCliente> CUAltaCliente { get; set; }
+        public ICUBuscarPorId<DTOCliente> CUBuscarCliente { get; set; } 
+        public ICUBuscarRutOMonto<DTOCliente> CUBuscarRutOMonto { get; set; } 
 
-        public ICUListado<Cliente> CUListadoCliente { get; set; }
+        public ICUListado<DTOCliente> CUListadoCliente { get; set; }
 
-        public ClienteController(ICUModificar<Cliente> cUModificarCliente, ICUBaja cUBajaCliente, ICUAlta<Cliente> cUAltaCliente, 
-                                ICUBuscarPorId<Cliente> cUBuscarCliente, ICUListado<Cliente> cUListadoCliente, ICUBuscarRutOMonto<Cliente> cUBuscarRutOMonto)
+        public ClienteController(ICUModificar<DTOCliente> cUModificarCliente, ICUBaja cUBajaCliente, ICUAlta<DTOCliente> cUAltaCliente, 
+                                ICUBuscarPorId<DTOCliente> cUBuscarCliente, ICUListado<DTOCliente> cUListadoCliente, ICUBuscarRutOMonto<DTOCliente> cUBuscarRutOMonto)
         {
             CUModificarCliente = cUModificarCliente;
             CUBajaCliente = cUBajaCliente;
@@ -31,7 +34,8 @@ namespace Obligatorio.Controllers
         // GET: ClienteController
         public ActionResult Index()
         {
-            return View();
+            List<DTOCliente> clientes = CUListadoCliente.ObtenerListado();
+            return View(clientes);
         }
 
         // GET: ClienteController/Details/5
@@ -42,7 +46,7 @@ namespace Obligatorio.Controllers
 
         public ActionResult BusquedaClientesMonto()
         {
-            List<Cliente> temas = CUListadoCliente.ObtenerListado();
+            List<DTOCliente> temas = CUListadoCliente.ObtenerListado();
             return View(temas);
         }
 
@@ -52,7 +56,7 @@ namespace Obligatorio.Controllers
         {
             try
             {
-                List<Cliente> temas = CUBuscarRutOMonto.Buscar(rut, razonSocial,monto);
+                List<DTOCliente> temas = CUBuscarRutOMonto.Buscar(rut, razonSocial,monto);
                 return View(temas);
             }
             catch (Exception ex)
@@ -65,9 +69,23 @@ namespace Obligatorio.Controllers
 
 
         // GET: ClienteController/Create
-        public ActionResult Create()
+        public ActionResult Create(DTOCliente nuevo)
         {
-            return View();
+            try
+            {
+                CUAltaCliente.Alta(nuevo);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DatosInvalidosException ex)
+            {
+                ViewBag.Mensaje = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Mensaje = "Ocurrió un error inesperado. No se hizo el alta del cliente";
+            }
+
+            return View(nuevo);
         }
 
         // POST: ClienteController/Create
@@ -109,7 +127,8 @@ namespace Obligatorio.Controllers
         // GET: ClienteController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            DTOCliente t = CUBuscarCliente.Buscar(id);
+            return View(t);
         }
 
         // POST: ClienteController/Delete/5
@@ -119,6 +138,7 @@ namespace Obligatorio.Controllers
         {
             try
             {
+                CUBajaCliente.Baja(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

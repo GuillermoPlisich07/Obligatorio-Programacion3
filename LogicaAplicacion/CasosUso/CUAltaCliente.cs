@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using DTOs;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUAltaCliente : ICUAlta<Cliente>
+    public class CUAltaCliente : ICUAlta<DTOCliente>
     {
         public IRepositorioCliente Repo { get; set; }
 
@@ -18,9 +19,9 @@ namespace LogicaAplicacion.CasosUso
             Repo = repo;
         }
 
-        public void Alta(Cliente value)
+        public void Alta(DTOCliente nuevo)
         {
-            throw new NotImplementedException();
+            Repo.Add(MapperCliente.ToCliente(nuevo));
         }
     }
 }

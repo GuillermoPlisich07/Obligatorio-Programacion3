@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using DTOs;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUListadoCliente : ICUListado<Cliente>
+    public class CUListadoCliente : ICUListado<DTOCliente>
     {
         
         public IRepositorioCliente Repo { get; set; }
@@ -19,9 +20,9 @@ namespace LogicaAplicacion.CasosUso
             Repo = repo;
         }
 
-        public List<Cliente> ObtenerListado()
+        public List<DTOCliente> ObtenerListado()
         {
-            return Repo.FindAll();
+            return MapperCliente.ToListadoSimpleDTO(Repo.FindAll());
         }
     }
 }

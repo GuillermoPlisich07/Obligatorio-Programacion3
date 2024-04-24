@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using DTOs;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUBusquedaClientesMonto : ICUBuscarRutOMonto<Cliente>
+    public class CUBusquedaClientesMonto : ICUBuscarRutOMonto<DTOCliente>
     {
         public IRepositorioCliente Repo { get; set; }
 
@@ -18,9 +19,9 @@ namespace LogicaAplicacion.CasosUso
             Repo = repo;
         }
 
-        public List<Cliente> Buscar(string rut, string razonSocial, decimal monto)
+        public List<DTOCliente> Buscar(string rut, string razonSocial, decimal monto)
         {
-            return Repo.FindByRutOrMonto(rut, razonSocial, monto);
+            return MapperCliente.ToListadoSimpleDTO(Repo.FindByRutOrMonto(rut, razonSocial, monto));
         }
     }
 }
