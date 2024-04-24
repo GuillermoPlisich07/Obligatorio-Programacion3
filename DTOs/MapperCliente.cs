@@ -16,6 +16,10 @@ namespace DTOs
               id = cliente.id,
               RUT = cliente.RUT,
               razonSocial = cliente.razonSocial,
+              ciudad = cliente.ciudad,  
+              numPuerta = cliente.numPuerta,
+              calle = cliente.calle,    
+              distancia = cliente.distancia,
             };
         }
 
@@ -25,7 +29,12 @@ namespace DTOs
             return new DTOCliente()
             {
                 id = cliente.id,
-                RUT = cliente.RUT
+                RUT = cliente.RUT,
+                razonSocial = cliente.razonSocial,
+                ciudad = cliente.ciudad,
+                numPuerta = cliente.numPuerta,
+                calle = cliente.calle,
+                distancia = cliente.distancia,
             };
         }
         public static List<DTOCliente> ToListadoSimpleDTO(List<Cliente> clientes)
@@ -33,12 +42,5 @@ namespace DTOs
             return clientes.Select(clientes => ToDTOCliente(clientes)).ToList();
         }
 
-        //public static List<DTOCliente> ToFindByIdDTO(List<Cliente> clientes, int id)
-        //{
-        //    return clientes
-        //        .Where(cliente => cliente.id == id) // Filtrar por ID
-        //        .Select(cliente => ToDTOCliente(cliente)) // Convertir a DTOCliente
-        //        .ToList(); 
-        //}
     }
 }

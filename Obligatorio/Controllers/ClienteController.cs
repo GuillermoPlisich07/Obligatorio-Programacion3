@@ -148,11 +148,11 @@ namespace Obligatorio.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult BusquedaClientes(string BusquedaClientes, IFormCollection collection)
-        {
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult BusquedaClientes(string BusquedaClientes, IFormCollection collection)
+        //{
+        //    return View();
+        //}
 
 
     }
