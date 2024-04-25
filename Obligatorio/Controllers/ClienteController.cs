@@ -1,7 +1,6 @@
 ﻿using DTOs;
 using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCU;
-using LogicaDatos.Migrations;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.ExcepcionesDominio;
 using Microsoft.AspNetCore.Http;
@@ -146,14 +145,6 @@ namespace Obligatorio.Controllers
                 return View();
             }
         }
-
-
-        //[HttpPost]
-        //public ActionResult BusquedaClientes(string BusquedaClientes, IFormCollection collection)
-        //{
-        //    return View();
-        //}
-
 
     }
 }

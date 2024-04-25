@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LogicaNegocio.Dominio
 {
@@ -17,7 +18,7 @@ namespace LogicaNegocio.Dominio
 
         [Required(ErrorMessage = "El nombre del artículo es obligatorio")]
         [MaxLength(100, ErrorMessage = "El nombre del artículo no puede tener más de 100 caracteres")]
-        [Column("nombre")]
+        [Column("nombre"), NotNull]
         public string nombre { get; set; }
 
         [Required(ErrorMessage = "La descripción del artículo es obligatoria")]
@@ -27,7 +28,7 @@ namespace LogicaNegocio.Dominio
 
         [Required(ErrorMessage = "El código del proveedor es obligatorio")]
         [StringLength(13, MinimumLength = 13, ErrorMessage = "El código del proveedor debe tener 13 dígitos significativos")]
-        [Column("codigoProveedor")]
+        [Column("codigoProveedor"), MinLength(13)]
         public int codigoProveedor { get; set; }
 
         [Column("precioPublico", TypeName = "decimal(18, 2)")]
