@@ -16,7 +16,7 @@ namespace Obligatorio
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<ICUAlta<Articulo>, CUAltaArticulo>();
+            builder.Services.AddScoped<ICUAlta<DTOArticulo>, CUAltaArticulo>();
             builder.Services.AddScoped<ICUAlta<DTOCliente>, CUAltaCliente>();
             builder.Services.AddScoped<ICUAlta<Linea>, CUAltaLinea>();
             builder.Services.AddScoped<ICUAlta<Pedido>, CUAltaPedido>();
@@ -26,7 +26,7 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUBaja, CUBajaPedido>();
             builder.Services.AddScoped<ICUBaja, CUBajaUsuario>();
             builder.Services.AddScoped<ICUBuscarPorId<DTOCliente>, CUBuscarCliente>();
-            builder.Services.AddScoped<ICUListado<Articulo>, CUListadoArticulo>();
+            builder.Services.AddScoped<ICUListado<DTOArticulo>, CUListadoArticulo>();
             builder.Services.AddScoped<ICUListado<Pedido>, CUListadoPedido>();
             builder.Services.AddScoped<ICUListado<DTOUsuario>, CUListadoUsuario>();
             builder.Services.AddScoped<ICUModificar<DTOCliente>, CUModificarCliente>();

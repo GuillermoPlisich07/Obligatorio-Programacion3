@@ -16,7 +16,8 @@ namespace LogicaNegocio.Dominio
         public int id { get; set; }
 
         [Required(ErrorMessage = "El nombre del artículo es obligatorio")]
-        [MaxLength(100, ErrorMessage = "El nombre del artículo no puede tener más de 100 caracteres")]
+        [MinLength(10)]
+        [MaxLength(200, ErrorMessage = "El nombre del artículo no puede tener más de 100 caracteres")]
         [Column("nombre")]
         public string nombre { get; set; }
 

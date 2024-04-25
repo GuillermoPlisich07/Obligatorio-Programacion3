@@ -1,4 +1,6 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using DTOs;
+using LogicaAplicacion.CasosUso;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +10,10 @@ namespace Obligatorio.Controllers
     public class ArticuloController : Controller
     {
 
-        public ICUAlta<Articulo> CUAltaArticulo { get; set; }
-        public ICUListado<Articulo> CUListadoArticulo { get; set; }
+        public ICUAlta<DTOArticulo> CUAltaArticulo { get; set; }
+        public ICUListado<DTOArticulo> CUListadoArticulo { get; set; }
 
-        public ArticuloController(ICUAlta<Articulo> cUAltaArticulo, ICUListado<Articulo> cUListadoArticulo)
+        public ArticuloController(ICUAlta<DTOArticulo> cUAltaArticulo, ICUListado<DTOArticulo> cUListadoArticulo)
         {
             CUAltaArticulo = cUAltaArticulo;
             CUListadoArticulo = cUListadoArticulo;
@@ -21,7 +23,8 @@ namespace Obligatorio.Controllers
         // GET: ArticuloController
         public ActionResult Index()
         {
-            return View();
+            List<DTOArticulo> clientes = CUListadoArticulo.ObtenerListado();
+            return View(clientes);
         }
 
         // GET: ArticuloController/Details/5
