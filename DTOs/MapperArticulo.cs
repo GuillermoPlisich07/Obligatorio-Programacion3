@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicaNegocio.Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,34 @@ namespace DTOs
 {
     public class MapperArticulo
     {
+        public static Articulo ToArticulo(DTOArticulo articulo)
+        {
+            return new Articulo()
+            {
+                id = articulo.Id,
+                nombre = articulo.nombre,
+                descripcion = articulo.descripcion, 
+                precioPublico = articulo.precioPublico, 
+                stock = articulo.stock, 
+            };
+        }
 
+        public static DTOArticulo ToDTOArticulo(Articulo articulo)
+        {
 
+            return new DTOArticulo()
+            {
+                Id = articulo.id,
+                nombre = articulo.nombre,
+                descripcion = articulo.descripcion,
+                precioPublico = articulo.precioPublico,
+                stock = articulo.stock,
+            };
+        }
+        public static List<DTOArticulo> ToListadoSimpleDTO(List<Articulo> articulos)
+        {
+            return articulos.Select(articulos => ToDTOArticulo(articulos)).ToList();
+        }
 
     }
 }
