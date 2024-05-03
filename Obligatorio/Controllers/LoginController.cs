@@ -1,4 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using DTOs;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,9 @@ namespace Obligatorio.Controllers
     public class LoginController : Controller
     {
         
-        public ICULogin<Usuario> CULoginUsuario { get; set; }
+        public ICULogin<DTOUsuario> CULoginUsuario { get; set; }
 
-        public LoginController(ICULogin<Usuario> cuLoginUsuario)
+        public LoginController(ICULogin<DTOUsuario> cuLoginUsuario)
         {
             CULoginUsuario = cuLoginUsuario;
         }

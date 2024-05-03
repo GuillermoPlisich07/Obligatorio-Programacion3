@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicaDatos", "LogicaDatos\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicaAplicacion", "LogicaAplicacion\LogicaAplicacion.csproj", "{69C14F1D-35D2-4578-BF2E-FD3F5CBB3E19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{9864A57E-DCE8-42C0-87FF-9016FCE5C2C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTOs", "DTOs\DTOs.csproj", "{9864A57E-DCE8-42C0-87FF-9016FCE5C2C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{074D78BD-0478-4221-8C93-613A50ABABF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{9864A57E-DCE8-42C0-87FF-9016FCE5C2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9864A57E-DCE8-42C0-87FF-9016FCE5C2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9864A57E-DCE8-42C0-87FF-9016FCE5C2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{074D78BD-0478-4221-8C93-613A50ABABF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{074D78BD-0478-4221-8C93-613A50ABABF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{074D78BD-0478-4221-8C93-613A50ABABF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{074D78BD-0478-4221-8C93-613A50ABABF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

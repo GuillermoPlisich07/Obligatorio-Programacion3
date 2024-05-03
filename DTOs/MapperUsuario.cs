@@ -23,14 +23,18 @@ namespace DTOs
 
         public static DTOUsuario ToDTOUsuario(Usuario usuario)
         {
-            
-            return new DTOUsuario()
+
+            if (usuario!=null)
             {
-                Id = usuario.id,
-                nombre = usuario.nombre,
-                apellido = usuario.apellido,
-                email = usuario.email,
-            };
+                return new DTOUsuario()
+                {
+                    Id = usuario.id,
+                    nombre = usuario.nombre,
+                    apellido = usuario.apellido,
+                    email = usuario.email,
+                };
+            }
+            return null;
         }
 
         public static List<DTOUsuario> ToListadoUsuarioDTO(List<Usuario> usuarios)

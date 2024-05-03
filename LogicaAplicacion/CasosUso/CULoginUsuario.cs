@@ -1,5 +1,5 @@
-﻿using LogicaAplicacion.InterfacesCU;
-using LogicaNegocio.Dominio;
+﻿using DTOs;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CULoginUsuario : ICULogin<Usuario>
+    public class CULoginUsuario : ICULogin<DTOUsuario>
     {
         public IRepositorioUsuario Repo { get; set; }
 
@@ -18,9 +18,9 @@ namespace LogicaAplicacion.CasosUso
             Repo = repo;
         }
 
-        public Usuario loguearse(string email, string password)
+        public DTOUsuario loguearse(string email, string password)
         {
-            return Repo.Login(email,password);
+            return MapperUsuario.ToDTOUsuario(Repo.Login(email,password));
         }
     }
 }

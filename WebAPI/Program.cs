@@ -1,3 +1,4 @@
+
 using DTOs;
 using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCU;
@@ -5,7 +6,7 @@ using LogicaDatos.Repositorios;
 using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 
-namespace Obligatorio
+namespace WebAPI
 {
     public class Program
     {
@@ -14,8 +15,8 @@ namespace Obligatorio
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
 
+            builder.Services.AddControllers();
             builder.Services.AddScoped<ICUAlta<DTOArticulo>, CUAltaArticulo>();
             builder.Services.AddScoped<ICUAlta<DTOCliente>, CUAltaCliente>();
             builder.Services.AddScoped<ICUAlta<Linea>, CUAltaLinea>();
@@ -45,28 +46,25 @@ namespace Obligatorio
 
             builder.Services.AddDbContext<LibreriaContext>();
 
-            // le inyecto al proyecto el uso de session
-            builder.Services.AddSession();
 
-            WebApplication app = builder.Build();
+
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-            app.UseSession();
 
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Login}/{action=login}/{id?}");
+
+            app.MapControllers();
 
             app.Run();
         }
