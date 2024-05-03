@@ -10,17 +10,18 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUListadoArticulo : ICUListado<DTOArticulo>
+    public class CUListadoArticuloOrdenado : ICUListadoOrdenado<DTOArticulo>
     {
         public IRepositorioArticulo Repo { get; set; }
 
-        public CUListadoArticulo(IRepositorioArticulo repo)
+        public CUListadoArticuloOrdenado(IRepositorioArticulo repo)
         {
             Repo = repo;
         }
-        public List<DTOArticulo> ObtenerListado()
+    
+        public List<DTOArticulo> ObtenerListadoOrdenado()
         {
-            return MapperArticulo.ToListadoSimpleDTO(Repo.FindAll());
+            return MapperArticulo.ToListadoOrdenado(Repo.FindAll());
         }
 
     }

@@ -38,5 +38,11 @@ namespace DTOs
             return articulos.Select(articulos => ToDTOArticulo(articulos)).ToList();
         }
 
+        public static List<DTOArticulo> ToListadoOrdenado(List<Articulo> articulos)
+        {
+            return articulos.OrderBy(articulo => articulo.nombre).Select(articulo => ToDTOArticulo(articulo)).ToList();
+        }
     }
+
 }
+

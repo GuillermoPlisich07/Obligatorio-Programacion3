@@ -29,6 +29,9 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUListado<DTOArticulo>, CUListadoArticulo>();
             builder.Services.AddScoped<ICUListado<Pedido>, CUListadoPedido>();
             builder.Services.AddScoped<ICUListado<DTOUsuario>, CUListadoUsuario>();
+
+
+
             builder.Services.AddScoped<ICUModificar<DTOCliente>, CUModificarCliente>();
             builder.Services.AddScoped<ICUModificar<Linea>, CUModificarLinea>();
             builder.Services.AddScoped<ICUModificar<DTOUsuario>, CUModificarUsuario>();

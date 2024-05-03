@@ -27,7 +27,7 @@ namespace WebAPI
             builder.Services.AddScoped<ICUBaja, CUBajaPedido>();
             builder.Services.AddScoped<ICUBaja, CUBajaUsuario>();
             builder.Services.AddScoped<ICUBuscarPorId<DTOCliente>, CUBuscarCliente>();
-            builder.Services.AddScoped<ICUListado<DTOArticulo>, CUListadoArticulo>();
+            builder.Services.AddScoped<ICUListadoOrdenado<DTOArticulo>, CUListadoArticuloOrdenado>();
             builder.Services.AddScoped<ICUListado<Pedido>, CUListadoPedido>();
             builder.Services.AddScoped<ICUListado<DTOUsuario>, CUListadoUsuario>();
             builder.Services.AddScoped<ICUModificar<DTOCliente>, CUModificarCliente>();

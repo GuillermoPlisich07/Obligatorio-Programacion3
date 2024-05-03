@@ -42,8 +42,8 @@ namespace LogicaDatos.Migrations
 
                     b.Property<string>("nombre")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
                         .HasColumnName("nombre");
 
                     b.Property<decimal>("precioPublico")

@@ -11,7 +11,7 @@ namespace Obligatorio.Controllers
     {
 
         public ICUAlta<DTOArticulo> CUAltaArticulo { get; set; }
-        public ICUListado<DTOArticulo> CUListadoArticulo { get; set; }
+        public ICUListado<DTOArticulo> CUListadoArticulo{ get; set; }
 
         public ArticuloController(ICUAlta<DTOArticulo> cUAltaArticulo, ICUListado<DTOArticulo> cUListadoArticulo)
         {
