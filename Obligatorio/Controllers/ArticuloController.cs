@@ -2,6 +2,7 @@
 using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
+using LogicaNegocio.ExcepcionesDominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,16 +43,25 @@ namespace Obligatorio.Controllers
         // POST: ArticuloController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(DTOArticulo nuevo)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+        
+                    CUAltaArticulo.Alta(nuevo);
+                    return RedirectToAction(nameof(Index));
+              
             }
-            catch
+            catch (DatosInvalidosException ex)
             {
-                return View();
+                ViewBag.Mensaje = ex.Message;
             }
+            catch (Exception ex)
+            {
+                ViewBag.Mensaje = "Ocurrió un error inesperado. No se hizo el alta del Articulo";
+            }
+
+            return View(nuevo);
         }
 
         // GET: ArticuloController/Edit/5
