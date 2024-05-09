@@ -1,7 +1,5 @@
 ﻿using DTOs;
-using LogicaAplicacion.CasosUso;
 using LogicaAplicacion.InterfacesCU;
-using LogicaNegocio.Dominio;
 using LogicaNegocio.ExcepcionesDominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

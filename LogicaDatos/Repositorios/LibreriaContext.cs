@@ -18,13 +18,46 @@ namespace LogicaDatos.Repositorios
         public DbSet<PedidoExpress> PedidosExpress { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //    //ACÁ ES DONDE PONDRÍAMOS NUESTRO CÓDIGO DE "FLUENT API" PARA CONFIGURAR
-        //    //COSAS DE NUESTRO MODELO DE ENTIDES QUE PUEDEN TENER IMPACTO A NIVEL DE LA BD (ESQUEMAS)
-        //    //SUSTITUYE O COMPLEMENTA LAS DATA ANNOTATIONS
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //base.OnModelCreating(modelBuilder);
+
+            //// Configuración para la clase Articulo
+            //modelBuilder.Entity<Articulo>()
+            //    .HasKey(a => a.id); // Definir la clave primaria
+
+            //modelBuilder.Entity<Articulo>()
+            //    .Property(a => a.id)
+            //    .IsRequired()
+            //    .ValueGeneratedOnAdd(); // Configurar la generación automática del ID
+
+            
+            //modelBuilder.Entity<Articulo>()
+            //    .Property(a => a.nombre)
+            //    .IsRequired()
+            //    .HasMaxLength(200) // Establecer la longitud máxima del nombre
+            //    .HasAnnotation("MinLength", 10); // Establecer la longitud mínima del nombre
+
+            //modelBuilder.Entity<Articulo>()
+            //    .Property(a => a.descripcion)
+            //    .IsRequired()
+            //    .HasMaxLength(200);
+
+            //modelBuilder.Entity<Articulo>()
+            //    .Property(a => a.codigoProveedor)
+            //    .IsRequired()
+            //    .HasAnnotation("MinLength", 10);
+
+
+            //modelBuilder.Entity<Articulo>()
+            //    .Property(a => a.precioPublico)
+            //    .HasColumnType("decimal(18, 2)");
+
+            //modelBuilder.Entity<Articulo>()
+            //    .Property(a => a.stock);
+
+
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

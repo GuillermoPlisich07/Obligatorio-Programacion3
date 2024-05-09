@@ -12,30 +12,17 @@ namespace LogicaNegocio.Dominio
 {
     public class Articulo : IValidable
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         public int id { get; set; }
 
-        [Required(ErrorMessage = "El nombre del artículo es obligatorio")]
-        [MinLength(10)]
-        [MaxLength(200, ErrorMessage = "El nombre del artículo no puede tener más de 100 caracteres")]
-        [Column("nombre")]
         public string nombre { get; set; }
 
-        [Required(ErrorMessage = "La descripción del artículo es obligatoria")]
-        [MinLength(5, ErrorMessage = "La descripción del artículo debe tener al menos 5 caracteres")]
-        [Column("descripcion")]
         public string descripcion { get; set; }
 
-        [Required(ErrorMessage = "El código del proveedor es obligatorio")]
-        [StringLength(13, MinimumLength = 13, ErrorMessage = "El código del proveedor debe tener 13 dígitos significativos")]
-        [Column("codigoProveedor"), MinLength(13)]
         public int codigoProveedor { get; set; }
 
-        [Column("precioPublico", TypeName = "decimal(18, 2)")]
         public decimal precioPublico { get; set; }
 
-        [Column("stock")]
         public int stock { get; set; }
 
         public void Validar()
