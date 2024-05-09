@@ -11,12 +11,24 @@ namespace DTOs
     public class DTOCliente
     {
         public int id { get; set; }
-        public string razonSocial { get; set; }
-        public int RUT { get; set; }
-        public string ciudad { get; set; }
-        public int numPuerta { get; set; }
-        public string calle { get; set; }
-        public decimal distancia { get; set; }
 
+        [Required(ErrorMessage = "La razón social es obligatoria.")]
+        public string razonSocial { get; set; }
+
+        [Required(ErrorMessage = "El RUT es obligatorio.")]
+        [RegularExpression("^[0-9]{12}$", ErrorMessage = "El RUT debe ser un número de 12 dígitos.")]
+        public int RUT { get; set; }
+
+        [Required(ErrorMessage = "La ciudad es obligatoria.")]
+        public string ciudad { get; set; }
+
+        [Required(ErrorMessage = "El número de puerta es obligatorio.")]
+        public int numPuerta { get; set; }
+
+        [Required(ErrorMessage = "La calle es obligatoria.")]
+        public string calle { get; set; }
+
+        [Required(ErrorMessage = "La distancia es obligatoria.")]
+        public decimal distancia { get; set; }
     }
 }
