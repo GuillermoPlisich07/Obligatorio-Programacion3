@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
             try
             {
                 List<DTOArticulo> articulos = CUListadoArticuloOrdenado.ObtenerListadoOrdenado();
-                 return Ok(articulos);
+                return Ok(articulos);
             }
             catch (Exception ex)
             {

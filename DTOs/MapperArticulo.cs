@@ -13,7 +13,7 @@ namespace DTOs
         {
             return new Articulo()
             {
-                id = articulo.Id,
+                id = articulo.id,
                 nombre = articulo.nombre,
                 descripcion = articulo.descripcion, 
                 precioPublico = articulo.precioPublico, 
@@ -26,7 +26,7 @@ namespace DTOs
 
             return new DTOArticulo()
             {
-                Id = articulo.id,
+                id = articulo.id,
                 nombre = articulo.nombre,
                 descripcion = articulo.descripcion,
                 precioPublico = articulo.precioPublico,
