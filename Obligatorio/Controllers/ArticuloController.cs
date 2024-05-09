@@ -47,10 +47,8 @@ namespace Obligatorio.Controllers
         {
             try
             {
-        
                     CUAltaArticulo.Alta(nuevo);
-                    return RedirectToAction(nameof(Index));
-              
+                    return RedirectToAction(nameof(Index));             
             }
             catch (DatosInvalidosException ex)
             {
