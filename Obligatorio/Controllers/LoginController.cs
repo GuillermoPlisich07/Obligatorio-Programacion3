@@ -31,9 +31,9 @@ namespace Obligatorio.Controllers
 
             if (usuario != null)
             {
-                string nombre = usuario.nombre;
-                string apellido = usuario.apellido;
-                string email = usuario.email;
+                string nombre = usuario.Nombre;
+                string apellido = usuario.Apellido;
+                string email = usuario.Email;
                 HttpContext.Session.SetString("Nombre", nombre);
                 HttpContext.Session.SetString("Apellido", apellido);
                 HttpContext.Session.SetString("Email", email);

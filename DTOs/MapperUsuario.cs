@@ -14,10 +14,10 @@ namespace DTOs
             return new Usuario()
             {
                 id = usuario.Id,
-                nombre = usuario.nombre,
-                apellido = usuario.apellido,
-                email = usuario.email,
-                password = usuario.password,
+                nombre = usuario.Nombre,
+                apellido = usuario.Apellido,
+                email = usuario.Email,
+                password = usuario.Password,
             }; 
         }
 
@@ -29,9 +29,10 @@ namespace DTOs
                 return new DTOUsuario()
                 {
                     Id = usuario.id,
-                    nombre = usuario.nombre,
-                    apellido = usuario.apellido,
-                    email = usuario.email,
+                    Nombre = usuario.nombre,
+                    Apellido = usuario.apellido,
+                    Email = usuario.email,
+                    Password = usuario.passwordHash
                 };
             }
             return null;

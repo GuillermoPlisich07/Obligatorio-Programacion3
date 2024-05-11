@@ -53,15 +53,15 @@ namespace LogicaDatos.Repositorios
         public void Update(Usuario obj)
         {
             // Verificar si el campo passwordHash si es vacio y es nulo
-            if (string.IsNullOrEmpty(obj.passwordHash))
+            if (string.IsNullOrEmpty(obj.password))
             {
                 // Actualizar todos los campos excepto passwordHash
                 Contexto.Entry(obj).State = EntityState.Modified;
                 Contexto.Entry(obj).Property(u => u.passwordHash).IsModified = false;
             }
-            
             else
             {
+                obj.EncriptarPassword();
                 Contexto.Usuarios.Update(obj);
             }
             
@@ -73,14 +73,14 @@ namespace LogicaDatos.Repositorios
         {
             Usuario user = FindByEmail(email);
 
-            //if (user!=null && user.VerificarPassword(password))
-            //{
-            //    return user;
-            //}
-            if (user != null && user.passwordHash==password)
+            if (user != null && user.VerificarPassword(password))
             {
                 return user;
             }
+            //if (user != null && user.passwordHash==password)
+            //{
+            //    return user;
+            //}
 
             return null;
         }
