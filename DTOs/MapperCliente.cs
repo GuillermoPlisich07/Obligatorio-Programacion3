@@ -13,13 +13,13 @@ namespace DTOs
         {
             return new Cliente()
             {
-              id = cliente.id,
+              id = cliente.Id,
               RUT = cliente.RUT,
-              razonSocial = cliente.razonSocial,
-              ciudad = cliente.ciudad,  
-              numPuerta = cliente.numPuerta,
-              calle = cliente.calle,    
-              distancia = cliente.distancia,
+              razonSocial = cliente.RazonSocial,
+              ciudad = cliente.Ciudad,  
+              numPuerta = cliente.NumPuerta,
+              calle = cliente.Calle,    
+              distancia = cliente.Distancia,
             };
         }
 
@@ -28,13 +28,13 @@ namespace DTOs
 
             return new DTOCliente()
             {
-                id = cliente.id,
+                Id = cliente.id,
                 RUT = cliente.RUT,
-                razonSocial = cliente.razonSocial,
-                ciudad = cliente.ciudad,
-                numPuerta = cliente.numPuerta,
-                calle = cliente.calle,
-                distancia = cliente.distancia,
+                RazonSocial = cliente.razonSocial,
+                Ciudad = cliente.ciudad,
+                NumPuerta = cliente.numPuerta,
+                Calle = cliente.calle,
+                Distancia = cliente.distancia,
             };
         }
         public static List<DTOCliente> ToListadoSimpleDTO(List<Cliente> clientes)
