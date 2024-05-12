@@ -59,6 +59,7 @@ namespace LogicaDatos.Repositorios
         public List<Cliente> FindByRutOrMonto(string rut, string razonSocial, decimal monto)
         {
             var query = Contexto.Clientes
+                
                     .Join(Contexto.Pedidos,
                           cliente => cliente.id,
                           pedido => pedido.cliente.id,

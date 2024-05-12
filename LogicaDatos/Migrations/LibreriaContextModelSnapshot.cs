@@ -42,8 +42,8 @@ namespace LogicaDatos.Migrations
 
                     b.Property<string>("nombre")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("nombre");
 
                     b.Property<decimal>("precioPublico")
@@ -56,7 +56,7 @@ namespace LogicaDatos.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Articulos");
+                    b.ToTable("Articulos", (string)null);
                 });
 
             modelBuilder.Entity("LogicaNegocio.Dominio.Cliente", b =>
@@ -90,7 +90,7 @@ namespace LogicaDatos.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Cliente");
+                    b.ToTable("Cliente", (string)null);
                 });
 
             modelBuilder.Entity("LogicaNegocio.Dominio.Linea", b =>
@@ -119,7 +119,7 @@ namespace LogicaDatos.Migrations
 
                     b.HasIndex("articuloid");
 
-                    b.ToTable("Lineas");
+                    b.ToTable("Lineas", (string)null);
                 });
 
             modelBuilder.Entity("LogicaNegocio.Dominio.Pedido", b =>
@@ -157,7 +157,7 @@ namespace LogicaDatos.Migrations
 
                     b.HasIndex("idCliente");
 
-                    b.ToTable("Pedido");
+                    b.ToTable("Pedido", (string)null);
 
                     b.UseTptMappingStrategy();
                 });
@@ -192,7 +192,7 @@ namespace LogicaDatos.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("LogicaNegocio.Dominio.PedidoComun", b =>
@@ -203,7 +203,7 @@ namespace LogicaDatos.Migrations
                         .HasColumnType("decimal(18, 2)")
                         .HasColumnName("distancia");
 
-                    b.ToTable("PedidoComun");
+                    b.ToTable("PedidoComun", (string)null);
                 });
 
             modelBuilder.Entity("LogicaNegocio.Dominio.PedidoExpress", b =>
@@ -214,7 +214,7 @@ namespace LogicaDatos.Migrations
                         .HasColumnType("decimal(18, 2)")
                         .HasColumnName("plazoDias");
 
-                    b.ToTable("PedidoExpress");
+                    b.ToTable("PedidoExpress", (string)null);
                 });
 
             modelBuilder.Entity("LogicaNegocio.Dominio.Linea", b =>

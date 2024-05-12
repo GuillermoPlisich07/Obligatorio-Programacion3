@@ -77,7 +77,7 @@ namespace LogicaDatos.Repositorios
             {
                 return user;
             }
-            //if (user != null && user.passwordHash==password)
+            //if (user != null && user.passwordHash == password)
             //{
             //    return user;
             //}

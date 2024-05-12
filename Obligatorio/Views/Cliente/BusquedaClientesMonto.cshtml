@@ -4,22 +4,24 @@
     ViewData["Title"] = "Busqueda Clientes Monto";
 }
 
-<h1>BusquedaClientesMonto</h1>
+<h1>Busqueda de Clientes</h1>
 <span>@ViewBag.Mensaje</span>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="BusquedaClientesMonto">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label form="rut">Ingrese el RUT del Cliente</label>
+                <label form="rut">- Ingrese el RUT del Cliente </label>
                 <input type="text" name="rut">
             </div>
+            <br />
             <div class="form-group">
-                <label form="razonSocial">Ingrese la Razon Social</label>
+                <label form="razonSocial">- Ingrese la Razon Social</label>
                 <input type="text" name="razonSocial">
             </div>
+            <br />
             <div class="form-group">
-                <label form="Monto">Ingrese el Monto</label>
+                <label form="Monto">- Ingrese el Monto</label>
                 <input type="number" name="monto">
             </div>
             <br />
@@ -29,7 +31,7 @@
         </form>
     </div>
 </div>
-
+<br />
 <table class="table">
     <thead>
         <tr>
