@@ -17,9 +17,9 @@ namespace LogicaDatos.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    codigoProveedor = table.Column<int>(type: "int", maxLength: 13, nullable: false),
+                    nombre = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    descripcion = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    codigoProveedor = table.Column<int>(type: "int", nullable: false),
                     precioPublico = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     stock = table.Column<int>(type: "int", nullable: false)
                 },
@@ -29,7 +29,7 @@ namespace LogicaDatos.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cliente",
+                name: "Clientes",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -43,7 +43,7 @@ namespace LogicaDatos.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cliente", x => x.id);
+                    table.PrimaryKey("PK_Clientes", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,6 +55,7 @@ namespace LogicaDatos.Migrations
                     email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     apellido = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     passwordHash = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -79,9 +80,9 @@ namespace LogicaDatos.Migrations
                 {
                     table.PrimaryKey("PK_Pedido", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Pedido_Cliente_idCliente",
+                        name: "FK_Pedido_Clientes_idCliente",
                         column: x => x.idCliente,
-                        principalTable: "Cliente",
+                        principalTable: "Clientes",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -100,6 +101,7 @@ namespace LogicaDatos.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lineas", x => x.id);
+                    table.CheckConstraint("CHK_cantUnidades_mayor_cero", "cantUnidades > 0");
                     table.ForeignKey(
                         name: "FK_Lineas_Articulos_articuloid",
                         column: x => x.articuloid,
@@ -163,6 +165,12 @@ namespace LogicaDatos.Migrations
                 name: "IX_Pedido_idCliente",
                 table: "Pedido",
                 column: "idCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_email",
+                table: "Usuarios",
+                column: "email",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -187,7 +195,7 @@ namespace LogicaDatos.Migrations
                 name: "Pedido");
 
             migrationBuilder.DropTable(
-                name: "Cliente");
+                name: "Clientes");
         }
     }
 }

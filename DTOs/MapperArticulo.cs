@@ -29,9 +29,8 @@ namespace DTOs
             return new DTOArticulo()
             {
                 id = articulo.id,
-                nombre = articulo.nombre.Valor,
-                descripcion = articulo.descripcion.Valor,
-                codigoProveedor = articulo.codigoProveedor.Valor,
+                nombre = articulo.nombre,
+                descripcion = articulo.descripcion,
                 precioPublico = articulo.precioPublico,
                 stock = articulo.stock,
             };
