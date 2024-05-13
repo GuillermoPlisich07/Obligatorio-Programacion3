@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaDatos.Migrations
 {
     [DbContext(typeof(LibreriaContext))]
-    [Migration("20240424234611_Inicial")]
+    [Migration("20240513180648_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -34,28 +34,25 @@ namespace LogicaDatos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<int>("codigoProveedor")
-                        .HasMaxLength(13)
                         .HasColumnType("int")
-                        .HasColumnName("codigoProveedor");
+                        .HasAnnotation("MinLength", 10);
 
                     b.Property<string>("descripcion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("descripcion");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("nombre")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("nombre");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasAnnotation("MinLength", 10);
 
                     b.Property<decimal>("precioPublico")
-                        .HasColumnType("decimal(18, 2)")
-                        .HasColumnName("precioPublico");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("stock")
-                        .HasColumnType("int")
-                        .HasColumnName("stock");
+                        .HasColumnType("int");
 
                     b.HasKey("id");
 
@@ -82,7 +79,7 @@ namespace LogicaDatos.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("distancia")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("numPuerta")
                         .HasColumnType("int");
@@ -93,7 +90,7 @@ namespace LogicaDatos.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Cliente");
+                    b.ToTable("Clientes");
                 });
 
             modelBuilder.Entity("LogicaNegocio.Dominio.Linea", b =>
@@ -122,7 +119,10 @@ namespace LogicaDatos.Migrations
 
                     b.HasIndex("articuloid");
 
-                    b.ToTable("Lineas");
+                    b.ToTable("Lineas", t =>
+                        {
+                            t.HasCheckConstraint("CHK_cantUnidades_mayor_cero", "cantUnidades > 0");
+                        });
                 });
 
             modelBuilder.Entity("LogicaNegocio.Dominio.Pedido", b =>
@@ -188,12 +188,19 @@ namespace LogicaDatos.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("passwordHash")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("id");
+
+                    b.HasIndex("email")
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });

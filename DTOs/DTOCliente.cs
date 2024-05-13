@@ -10,6 +10,7 @@ namespace DTOs
 {
     public class DTOCliente
     {
+        [Key]
         public int Id { get; set; }
 
         [DisplayName("Razon Social")]

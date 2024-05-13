@@ -1,6 +1,5 @@
 ﻿using DTOs;
 using LogicaAplicacion.InterfacesCU;
-using LogicaDatos.Migrations;
 using LogicaDatos.Repositorios;
 using LogicaNegocio.Dominio;
 using Microsoft.AspNetCore.Mvc;
