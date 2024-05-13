@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
+using LogicaNegocio.VOs;
 
 namespace LogicaNegocio.Dominio
 {
@@ -15,11 +16,11 @@ namespace LogicaNegocio.Dominio
         
         public int id { get; set; }
 
-        public string nombre { get; set; }
+        public NombreArticulo nombre { get; set; }
 
-        public string descripcion { get; set; }
+        public DescripcionArticulo descripcion { get; set; }
 
-        public int codigoProveedor { get; set; }
+        public CodigoProveedorArticulo codigoProveedor { get; set; }
 
         public decimal precioPublico { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using LogicaNegocio.Dominio;
+using LogicaNegocio.VOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,9 @@ namespace DTOs
             return new Articulo()
             {
                 id = articulo.id,
-                nombre = articulo.nombre,
-                descripcion = articulo.descripcion, 
+                nombre = new NombreArticulo(articulo.nombre),
+                descripcion = new DescripcionArticulo(articulo.descripcion), 
+                codigoProveedor = new CodigoProveedorArticulo(articulo.codigoProveedor),
                 precioPublico = articulo.precioPublico, 
                 stock = articulo.stock, 
             };
@@ -27,8 +29,9 @@ namespace DTOs
             return new DTOArticulo()
             {
                 id = articulo.id,
-                nombre = articulo.nombre,
-                descripcion = articulo.descripcion,
+                nombre = articulo.nombre.Valor,
+                descripcion = articulo.descripcion.Valor,
+                codigoProveedor = articulo.codigoProveedor.Valor,
                 precioPublico = articulo.precioPublico,
                 stock = articulo.stock,
             };
