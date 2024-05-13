@@ -4,6 +4,7 @@ using LogicaDatos.Repositorios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaDatos.Migrations
 {
     [DbContext(typeof(LibreriaContext))]
-    partial class LibreriaContextModelSnapshot : ModelSnapshot
+    [Migration("20240513231358_Actualizacion de Usuario")]
+    partial class ActualizaciondeUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +32,21 @@ namespace LogicaDatos.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int>("codigoProveedor")
+                        .HasColumnType("int")
+                        .HasAnnotation("MinLength", 10);
+
+                    b.Property<string>("descripcion")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("nombre")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasAnnotation("MinLength", 10);
 
                     b.Property<decimal>("precioPublico")
                         .HasColumnType("decimal(18, 2)");
@@ -203,68 +221,6 @@ namespace LogicaDatos.Migrations
                         .HasColumnName("plazoDias");
 
                     b.ToTable("PedidoExpress");
-                });
-
-            modelBuilder.Entity("LogicaNegocio.Dominio.Articulo", b =>
-                {
-                    b.OwnsOne("LogicaNegocio.VOs.CodigoProveedorArticulo", "codigoProveedor", b1 =>
-                        {
-                            b1.Property<int>("Articuloid")
-                                .HasColumnType("int");
-
-                            b1.Property<int>("Valor")
-                                .HasColumnType("int");
-
-                            b1.HasKey("Articuloid");
-
-                            b1.ToTable("Articulos");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Articuloid");
-                        });
-
-                    b.OwnsOne("LogicaNegocio.VOs.DescripcionArticulo", "descripcion", b1 =>
-                        {
-                            b1.Property<int>("Articuloid")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Valor")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("Articuloid");
-
-                            b1.ToTable("Articulos");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Articuloid");
-                        });
-
-                    b.OwnsOne("LogicaNegocio.VOs.NombreArticulo", "nombre", b1 =>
-                        {
-                            b1.Property<int>("Articuloid")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("Valor")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("Articuloid");
-
-                            b1.ToTable("Articulos");
-
-                            b1.WithOwner()
-                                .HasForeignKey("Articuloid");
-                        });
-
-                    b.Navigation("codigoProveedor")
-                        .IsRequired();
-
-                    b.Navigation("descripcion")
-                        .IsRequired();
-
-                    b.Navigation("nombre")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("LogicaNegocio.Dominio.Linea", b =>

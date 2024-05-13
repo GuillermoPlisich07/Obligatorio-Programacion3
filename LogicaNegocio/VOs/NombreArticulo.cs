@@ -19,6 +19,8 @@ namespace LogicaNegocio.VOs
             Validar();
         }
 
+        public NombreArticulo() { }
+
         public void Validar()
         {
             if (string.IsNullOrEmpty(Valor))

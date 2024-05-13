@@ -32,24 +32,6 @@ namespace LogicaDatos.Repositorios
                 .IsRequired()
                 .ValueGeneratedOnAdd(); // Configurar la generación automática del ID
 
-
-            modelBuilder.Entity<Articulo>()
-                .Property(a => a.nombre)
-                .IsRequired()
-                .HasMaxLength(200) // Establecer la longitud máxima del nombre
-                .HasAnnotation("MinLength", 10); // Establecer la longitud mínima del nombre
-
-            modelBuilder.Entity<Articulo>()
-                .Property(a => a.descripcion)
-                .IsRequired()
-                .HasMaxLength(200);
-
-            modelBuilder.Entity<Articulo>()
-                .Property(a => a.codigoProveedor)
-                .IsRequired()
-                .HasAnnotation("MinLength", 10);
-
-
             modelBuilder.Entity<Articulo>()
                 .Property(a => a.precioPublico)
                 .HasColumnType("decimal(18, 2)");
@@ -89,6 +71,9 @@ namespace LogicaDatos.Repositorios
                 .IsRequired()
                 .HasMaxLength(50)
                 .HasColumnType("nvarchar(50)");
+
+            modelBuilder.Entity<Usuario>()
+            .Ignore(e => e.password);
 
             modelBuilder.Entity<Usuario>()
                 .Property(u => u.passwordHash)

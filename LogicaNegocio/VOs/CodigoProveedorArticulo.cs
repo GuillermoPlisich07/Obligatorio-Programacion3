@@ -20,6 +20,8 @@ namespace LogicaNegocio.VOs
             Validar();
         }
 
+        private CodigoProveedorArticulo() { }
+
         public void Validar()
         {
             if (Valor == null || Valor == 0)

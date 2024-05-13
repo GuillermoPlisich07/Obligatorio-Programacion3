@@ -21,11 +21,11 @@ namespace DTOs
 
         [Required(ErrorMessage = "La descripción del artículo es obligatoria")]
         [MinLength(5, ErrorMessage = "La descripción del artículo debe tener al menos 5 caracteres")]
-        public string descripcion { get; set; }
+        public string Descripcion { get; set; }
 
         [Required(ErrorMessage = "El código del proveedor es obligatorio")]
         [StringLength(13, MinimumLength = 13, ErrorMessage = "El código del proveedor debe tener 13 dígitos significativos")]
-        public int codigoProveedor { get; set; }
+        public int CodigoProveedor { get; set; }
 
         [DisplayName("Precio Publico")]
         public decimal PrecioPublico { get; set; }
