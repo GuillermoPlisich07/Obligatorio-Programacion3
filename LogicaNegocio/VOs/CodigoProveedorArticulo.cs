@@ -11,10 +11,10 @@ namespace LogicaNegocio.VOs
     [Owned]
     public class CodigoProveedorArticulo
     {
-        public int Valor { get; init; }
+        public string Valor { get; init; }
 
 
-        public CodigoProveedorArticulo(int codigo)
+        public CodigoProveedorArticulo(string codigo)
         {
             Valor = codigo;
             Validar();
@@ -24,12 +24,12 @@ namespace LogicaNegocio.VOs
 
         public void Validar()
         {
-            if (Valor == null || Valor == 0)
+            if (String.IsNullOrEmpty(Valor))
             {
                 throw new DatosInvalidosException("El valor es obligatorio y no puede ser nulo o cero.");
             }
 
-            if (Valor == 13)
+            if (Valor.Length != 13)
             {
                 throw new DatosInvalidosException("El codigo de proveedor debe ser de 13 digitos.");
             }

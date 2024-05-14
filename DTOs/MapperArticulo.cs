@@ -14,13 +14,12 @@ namespace DTOs
         {
             return new Articulo()
             {
-                
                 id = articulo.Id,
                 nombre = new NombreArticulo(articulo.Nombre),
                 descripcion = new DescripcionArticulo(articulo.Descripcion),
                 codigoProveedor = new CodigoProveedorArticulo(articulo.CodigoProveedor),
                 precioPublico = articulo.PrecioPublico,
-                stock = articulo.Stock,
+                stock = articulo.Stock
             };
         }
 
@@ -34,7 +33,7 @@ namespace DTOs
                 Descripcion = articulo.descripcion.Valor,
                 CodigoProveedor = articulo.codigoProveedor.Valor,
                 PrecioPublico = articulo.precioPublico,
-                Stock = articulo.stock,
+                Stock = articulo.stock
             };
         }
         public static List<DTOArticulo> ToListadoSimpleDTO(List<Articulo> articulos)
