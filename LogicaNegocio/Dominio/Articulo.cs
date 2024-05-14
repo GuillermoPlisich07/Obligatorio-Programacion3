@@ -16,11 +16,11 @@ namespace LogicaNegocio.Dominio
         
         public int id { get; set; }
 
-        public NombreArticulo nombre { get; set; }
+        public string nombre { get; set; }
 
-        public DescripcionArticulo descripcion { get; set; }
+        public string descripcion { get; set; }
 
-        public CodigoProveedorArticulo codigoProveedor { get; set; }
+        public string codigoProveedor { get; set; }
 
         public decimal precioPublico { get; set; }
 

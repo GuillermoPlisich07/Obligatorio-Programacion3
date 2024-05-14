@@ -19,7 +19,7 @@ namespace LogicaNegocio.VOs
             Validar();
         }
 
-        public NombreArticulo() { }
+        private NombreArticulo() { }
 
         public void Validar()
         {

@@ -21,8 +21,7 @@ namespace LogicaDatos.Repositorios
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-
+         
             // ARTICULO
             modelBuilder.Entity<Articulo>()
                 .HasKey(a => a.id); // Definir la clave primaria
@@ -31,6 +30,22 @@ namespace LogicaDatos.Repositorios
                 .Property(a => a.id)
                 .IsRequired()
                 .ValueGeneratedOnAdd(); // Configurar la generación automática del ID
+
+            modelBuilder.Entity<Articulo>()
+                .Property(a => a.nombre)
+                .IsRequired()
+                .HasMaxLength(200) // Establecer la longitud máxima del nombre
+                .HasAnnotation("MinLength", 10); // Establecer la longitud mínima del nombre
+
+            modelBuilder.Entity<Articulo>()
+                .Property(a => a.descripcion)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            modelBuilder.Entity<Articulo>()
+                .Property(a => a.codigoProveedor)
+                .IsRequired()
+                .HasAnnotation("MinLength", 10);
 
             modelBuilder.Entity<Articulo>()
                 .Property(a => a.precioPublico)

@@ -24,7 +24,7 @@ namespace LogicaNegocio.VOs
 
         public void Validar()
         {
-            if (String.IsNullOrEmpty(Valor))
+            if (string.IsNullOrEmpty(Valor))
             {
                 throw new DatosInvalidosException("El valor es obligatorio y no puede ser nulo o cero.");
             }

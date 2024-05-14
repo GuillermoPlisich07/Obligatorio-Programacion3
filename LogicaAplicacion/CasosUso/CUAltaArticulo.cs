@@ -21,7 +21,8 @@ namespace LogicaAplicacion.CasosUso
 
         public void Alta(DTOArticulo nuevo)
         {
-            Repo.Add(MapperArticulo.ToArticulo(nuevo));
+            Articulo aux = MapperArticulo.ToArticulo(nuevo);
+            Repo.Add(aux);
         }
     }
 }
