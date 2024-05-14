@@ -19,7 +19,7 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUAlta<DTOArticulo>, CUAltaArticulo>();
             builder.Services.AddScoped<ICUAlta<DTOCliente>, CUAltaCliente>();
             builder.Services.AddScoped<ICUAlta<Linea>, CUAltaLinea>();
-            builder.Services.AddScoped<ICUAlta<Pedido>, CUAltaPedido>();
+            builder.Services.AddScoped<ICUAlta<DTOPedido>, CUAltaPedido>();
             builder.Services.AddScoped<ICUAlta<DTOUsuario>, CUAltaUsuario>();
             builder.Services.AddScoped<ICUBaja, CUBajaCliente>();
             builder.Services.AddScoped<ICUBaja, CUBajaLinea>();
@@ -27,7 +27,7 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUBaja, CUBajaUsuario>();
             builder.Services.AddScoped<ICUBuscarPorId<DTOCliente>, CUBuscarCliente>();
             builder.Services.AddScoped<ICUListado<DTOArticulo>, CUListadoArticulo>();
-            builder.Services.AddScoped<ICUListado<Pedido>, CUListadoPedido>();
+            builder.Services.AddScoped<ICUListado<DTOPedido>, CUListadoPedido>();
             builder.Services.AddScoped<ICUListado<DTOUsuario>, CUListadoUsuario>();
 
 

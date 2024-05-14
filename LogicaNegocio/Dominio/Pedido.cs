@@ -15,7 +15,6 @@ namespace LogicaNegocio.Dominio
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
-        [Required(ErrorMessage = "La fecha del pedido es obligatoria")]
         [Column("FechaPedido")]
         public DateTime fechaPedido { get; set; }
 
@@ -38,7 +37,11 @@ namespace LogicaNegocio.Dominio
         [Column("fechaPrometida")]
         public DateTime fechaPrometida { get; set; }
 
-
+        public Pedido()
+        {
+            // Cuando se crea un nuevo objeto Pedido, establece automáticamente la fecha del pedido como la fecha y hora actual.
+            fechaPedido = DateTime.Now;
+        }
 
     }
 }

@@ -20,7 +20,7 @@ namespace WebAPI
             builder.Services.AddScoped<ICUAlta<DTOArticulo>, CUAltaArticulo>();
             builder.Services.AddScoped<ICUAlta<DTOCliente>, CUAltaCliente>();
             builder.Services.AddScoped<ICUAlta<Linea>, CUAltaLinea>();
-            builder.Services.AddScoped<ICUAlta<Pedido>, CUAltaPedido>();
+            builder.Services.AddScoped<ICUAlta<DTOPedido>, CUAltaPedido>();
             builder.Services.AddScoped<ICUAlta<DTOUsuario>, CUAltaUsuario>();
             builder.Services.AddScoped<ICUBaja, CUBajaCliente>();
             builder.Services.AddScoped<ICUBaja, CUBajaLinea>();
@@ -28,7 +28,7 @@ namespace WebAPI
             builder.Services.AddScoped<ICUBaja, CUBajaUsuario>();
             builder.Services.AddScoped<ICUBuscarPorId<DTOCliente>, CUBuscarCliente>();
             builder.Services.AddScoped<ICUListadoOrdenado<DTOArticulo>, CUListadoArticuloOrdenado>();
-            builder.Services.AddScoped<ICUListado<Pedido>, CUListadoPedido>();
+            builder.Services.AddScoped<ICUListado<DTOPedido>, CUListadoPedido>();
             builder.Services.AddScoped<ICUListado<DTOUsuario>, CUListadoUsuario>();
             builder.Services.AddScoped<ICUModificar<DTOCliente>, CUModificarCliente>();
             builder.Services.AddScoped<ICUModificar<Linea>, CUModificarLinea>();

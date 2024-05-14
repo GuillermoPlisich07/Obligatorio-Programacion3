@@ -1,17 +1,21 @@
-﻿using LogicaAplicacion.InterfacesCU;
+﻿using DTOs;
+using LogicaAplicacion.CasosUso;
+using LogicaAplicacion.InterfacesCU;
 using LogicaNegocio.Dominio;
+using LogicaNegocio.ExcepcionesDominio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Obligatorio.Filtros;
 
 namespace Obligatorio.Controllers
 {
     public class PedidoController : Controller
     {
-        ICUAlta<Pedido> CUAltaPedido { get; set; }
-        ICUListado<Pedido> CUListadoPedido { get; set; }
+        ICUAlta<DTOPedido> CUAltaPedido { get; set; }
+        ICUListado<DTOPedido> CUListadoPedido { get; set; }
         ICUBaja CUBajaPedido { get; set; }  
 
-        public PedidoController(ICUAlta<Pedido> cUAltaPedido, ICUListado<Pedido> cUListadoPedido, ICUBaja cUBajaPedido)
+        public PedidoController(ICUAlta<DTOPedido> cUAltaPedido, ICUListado<DTOPedido> cUListadoPedido, ICUBaja cUBajaPedido)
         {
             CUAltaPedido = cUAltaPedido;
             CUListadoPedido = cUListadoPedido;
@@ -20,11 +24,12 @@ namespace Obligatorio.Controllers
 
 
 
-
+        [User]
         // GET: PedidoController
         public ActionResult Index()
         {
-            return View();
+            List<DTOPedido> pedidos = CUListadoPedido.ObtenerListado();
+            return View(pedidos);
         }
 
         // GET: PedidoController/Details/5
@@ -42,15 +47,24 @@ namespace Obligatorio.Controllers
         // POST: PedidoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(DTOPedido nuevo)
         {
-            try
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
+                try
+                {
+                    CUAltaPedido.Alta(nuevo);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DatosInvalidosException ex)
+                {
+                    ViewBag.Mensaje = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Mensaje = "Ocurrió un error inesperado. No se hizo el alta del pedido";
+                }
+
+                return View(nuevo);
             }
         }
 

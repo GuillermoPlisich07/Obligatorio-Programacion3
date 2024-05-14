@@ -19,7 +19,7 @@ namespace LogicaDatos.Repositorios
 
         public void Add(Pedido item)
         {
-            if (item != null)
+            if (item != null )
             {
                 Contexto.Pedidos.Add(item);
                 Contexto.SaveChanges(); // Aca es el alta en EF
