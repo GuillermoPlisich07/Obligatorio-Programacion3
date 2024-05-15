@@ -40,11 +40,15 @@ namespace Obligatorio
             builder.Services.AddScoped<ICUListado<DTOCliente>, CUListadoCliente>();
             builder.Services.AddScoped<ICUBuscarRutOMonto<DTOCliente>, CUBusquedaClientesMonto>();
 
+            builder.Services.AddScoped<ICUBuscarPorId<DTOImpuesto>, CUBuscarImpuesto>();
+            builder.Services.AddScoped<ICUModificar<DTOImpuesto>, CUModificarImpuesto>();
+
             builder.Services.AddScoped<IRepositorioArticulo, RepositorioArticulo>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
             builder.Services.AddScoped<IRepositorioLinea, RepositorioLinea>();
             builder.Services.AddScoped<IRepositorioPedido, RepositorioPedido>();
             builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+            builder.Services.AddScoped<IRepositorioImpuesto, RepositorioImpuesto>();
 
             builder.Services.AddDbContext<LibreriaContext>();
 

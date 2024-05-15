@@ -4,6 +4,7 @@ using LogicaDatos.Repositorios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaDatos.Migrations
 {
     [DbContext(typeof(LibreriaContext))]
-    partial class LibreriaContextModelSnapshot : ModelSnapshot
+    [Migration("20240515205916_Pedidos fluentapi")]
+    partial class Pedidosfluentapi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace LogicaDatos.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("LineaPedido", b =>
-                {
-                    b.Property<int>("Pedidoid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("lineasid")
-                        .HasColumnType("int");
-
-                    b.HasKey("Pedidoid", "lineasid");
-
-                    b.HasIndex("lineasid");
-
-                    b.ToTable("LineaPedido");
-                });
 
             modelBuilder.Entity("LogicaNegocio.Dominio.Articulo", b =>
                 {
@@ -106,31 +94,6 @@ namespace LogicaDatos.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("LogicaNegocio.Dominio.Impuesto", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<decimal>("IVA")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("entregaComunMayorCien")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("entregaExpressComun")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("entregaExpressMismoDia")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Impuesto", (string)null);
-                });
-
             modelBuilder.Entity("LogicaNegocio.Dominio.Linea", b =>
                 {
                     b.Property<int>("id")
@@ -138,6 +101,9 @@ namespace LogicaDatos.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int>("Pedidoid")
+                        .HasColumnType("int");
 
                     b.Property<int>("articuloid")
                         .HasColumnType("int");
@@ -149,6 +115,8 @@ namespace LogicaDatos.Migrations
                         .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("id");
+
+                    b.HasIndex("Pedidoid");
 
                     b.HasIndex("articuloid");
 
@@ -170,15 +138,11 @@ namespace LogicaDatos.Migrations
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<bool>("activo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("fechaPedido")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasColumnName("FechaPedido")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnName("FechaPedido");
 
                     b.Property<DateTime>("fechaPrometida")
                         .HasColumnType("datetime2");
@@ -241,8 +205,8 @@ namespace LogicaDatos.Migrations
                 {
                     b.HasBaseType("LogicaNegocio.Dominio.Pedido");
 
-                    b.Property<int>("distancia")
-                        .HasColumnType("int");
+                    b.Property<decimal>("distancia")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.ToTable("PedidoComun", (string)null);
                 });
@@ -260,23 +224,14 @@ namespace LogicaDatos.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LineaPedido", b =>
+            modelBuilder.Entity("LogicaNegocio.Dominio.Linea", b =>
                 {
                     b.HasOne("LogicaNegocio.Dominio.Pedido", null)
-                        .WithMany()
+                        .WithMany("lineas")
                         .HasForeignKey("Pedidoid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LogicaNegocio.Dominio.Linea", null)
-                        .WithMany()
-                        .HasForeignKey("lineasid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("LogicaNegocio.Dominio.Linea", b =>
-                {
                     b.HasOne("LogicaNegocio.Dominio.Articulo", "articulo")
                         .WithMany()
                         .HasForeignKey("articuloid")
@@ -314,6 +269,11 @@ namespace LogicaDatos.Migrations
                         .HasForeignKey("LogicaNegocio.Dominio.PedidoExpress", "id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("LogicaNegocio.Dominio.Pedido", b =>
+                {
+                    b.Navigation("lineas");
                 });
 #pragma warning restore 612, 618
         }

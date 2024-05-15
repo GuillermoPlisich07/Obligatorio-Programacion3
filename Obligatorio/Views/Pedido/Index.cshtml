@@ -14,9 +14,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.fechaPedido)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.total)
             </th>
             <th>
@@ -34,9 +31,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaPedido)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.total)
             </td>

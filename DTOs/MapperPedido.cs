@@ -14,7 +14,6 @@ namespace DTOs
             return new Pedido()
             {
                 id = pedido.id,
-                fechaPedido = DateTime.Now,
                 cliente = pedido.cliente,
                 lineas = pedido.lineas,
                 total = pedido.total,
@@ -30,7 +29,6 @@ namespace DTOs
             return new DTOPedido()
             {
                 id = pedido.id,
-                fechaPedido = DateTime.Now,
                 cliente = pedido.cliente,
                 lineas = pedido.lineas,
                 total = pedido.total,

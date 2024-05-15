@@ -4,6 +4,7 @@ using LogicaDatos.Repositorios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LogicaDatos.Migrations
 {
     [DbContext(typeof(LibreriaContext))]
-    partial class LibreriaContextModelSnapshot : ModelSnapshot
+    [Migration("20240515220819_PedidosModificacion")]
+    partial class PedidosModificacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,8 +244,8 @@ namespace LogicaDatos.Migrations
                 {
                     b.HasBaseType("LogicaNegocio.Dominio.Pedido");
 
-                    b.Property<int>("distancia")
-                        .HasColumnType("int");
+                    b.Property<decimal>("distancia")
+                        .HasColumnType("decimal(18, 2)");
 
                     b.ToTable("PedidoComun", (string)null);
                 });
