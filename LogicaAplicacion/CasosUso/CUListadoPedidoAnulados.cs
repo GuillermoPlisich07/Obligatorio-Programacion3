@@ -20,7 +20,7 @@ namespace LogicaAplicacion.CasosUso
 
             public List<DTOPedido> ObtenerListado()
             {
-                return MapperPedido.ToListadoPedidoComunDTO(Repo.FindAll());
+                return MapperPedido.ToListadoPedidoDTO(Repo.FindAll());
             }
         }
 }

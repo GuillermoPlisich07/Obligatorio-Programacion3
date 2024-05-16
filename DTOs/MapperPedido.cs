@@ -119,7 +119,6 @@ namespace DTOs
                 lineas = MapperLinea.ToListadoLinea(pedido.lineas),
                 total = pedido.total,
                 IVA = pedido.IVA,
-                recarga = pedido.recarga,
                 fechaPrometida = pedido.fechaPrometida,
                 activo = pedido.activo
             };
@@ -139,7 +138,6 @@ namespace DTOs
                     lineas = MapperLinea.ToListadoLineaDTO(pedido.lineas),
                     total = pedido.total,
                     IVA = pedido.IVA,
-                    recarga = pedido.recarga,
                     fechaPrometida = pedido.fechaPrometida,
                     activo = pedido.activo
                 };
