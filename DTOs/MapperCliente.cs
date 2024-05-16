@@ -34,7 +34,7 @@ namespace DTOs
                 Ciudad = cliente.ciudad,
                 NumPuerta = cliente.numPuerta,
                 Calle = cliente.calle,
-                Distancia = cliente.distancia,
+                Distancia = cliente.distancia
             };
         }
 

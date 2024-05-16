@@ -51,7 +51,7 @@ namespace WebAPI
             builder.Services.AddScoped<ICUBuscarPorId<DTOArticulo>, CUBuscarArticulo>();
             builder.Services.AddScoped<ICUListadoOrdenado<DTOArticulo>, CUListadoArticuloOrdenado>();
 
-            builder.Services.AddScoped<ICUListado<DTOPedido>, CUListadoPedidoAnulados>();
+            builder.Services.AddScoped<ICUListadoAnulados<DTOPedidoSimple>, CUListadoPedidoAnulados>();
 
             builder.Services.AddScoped<IRepositorioArticulo, RepositorioArticulo>();
             builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();

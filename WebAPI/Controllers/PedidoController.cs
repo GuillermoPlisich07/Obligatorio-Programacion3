@@ -10,38 +10,36 @@ namespace WebAPI.Controllers
     [ApiController]
     public class PedidoController : ControllerBase
     {
-        public ICUListado<DTOPedido> CUListadoPedido { get; set; }
+        public ICUListadoAnulados<DTOPedidoSimple> CUListadoPedidoAnulados { get; set; }
 
-        public PedidoController(ICUListado<DTOPedido> cUListadoPedido)
+        public PedidoController(ICUListadoAnulados<DTOPedidoSimple> cUListadoPedido)
         {
-            CUListadoPedido = cUListadoPedido;
+            CUListadoPedidoAnulados = cUListadoPedido;
         }
 
 
         // GET: api/<PedidoController>
         [HttpGet]
-        public IActionResult Get(DTOPedido pedido)
+        public IActionResult Get()
         {
-            if (pedido.activo == false)
-            {
                 try
                 {
-                    List<DTOPedido> pedidos = CUListadoPedido.ObtenerListado();
+                List<DTOPedidoSimple> pedidos = CUListadoPedidoAnulados.ObtenerListadoAnulados();
 
-                    // Ordenar la lista de pedidos por fecha de pedido de forma descendente
-                    pedidos = pedidos.OrderByDescending(p => p.fechaPedido).ToList();
+                var resultados = pedidos.OrderByDescending(p => p.fechaPedido)
+                                .Select(p => new { 
+                                         p.fechaPrometida,
+                                         p.cliente.RazonSocial,
+                                         p.total
+                                        })
+                                 .ToList();
 
-                    return Ok(pedidos);
+                return Ok(resultados);
                 }
                 catch (Exception ex)
                 {
                     return StatusCode(500, ex.Message);
                 }
-            }
-            else
-            {
-                throw new Exception("No hay ningún pedido anulado");
-            }
         }
 
         // GET api/<PedidoController>/5

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUListadoPedidoAnulados : ICUListado<DTOPedido>
+    public class CUListadoPedidoAnulados : ICUListadoAnulados<DTOPedidoSimple>
     {
             public IRepositorioPedido Repo { get; set; }
 
@@ -18,9 +18,9 @@ namespace LogicaAplicacion.CasosUso
                 Repo = repo;
             }
 
-            public List<DTOPedido> ObtenerListado()
-            {
-                return MapperPedido.ToListadoPedidoDTO(Repo.FindAll());
-            }
+        public List<DTOPedidoSimple> ObtenerListadoAnulados()
+        {
+            return MapperPedido.ToListadoPedidoSimpleDTO(Repo.FindAll().Where(e => e.activo == false).ToList());
+        }
         }
 }
