@@ -12,9 +12,8 @@ namespace DTOs
         //Comun
         public static PedidoComun ToPedidoComun(DTOPedidoComun pedido)
         {
-            return new PedidoComun()
+            PedidoComun nuevo = new PedidoComun()
             {
-                id = pedido.id,
                 cliente = MapperCliente.ToCliente(pedido.cliente),
                 lineas = MapperLinea.ToListadoLinea(pedido.lineas),
                 total = pedido.total,
@@ -24,6 +23,7 @@ namespace DTOs
                 distancia = pedido.distancia,
                 activo = pedido.activo
             };
+            return nuevo;
         }
 
         public static DTOPedidoComun ToDTOPedidoComun(PedidoComun pedido)
@@ -65,9 +65,8 @@ namespace DTOs
         //Express
         public static PedidoExpress ToPedidoExpress(DTOPedidoExpress pedido)
         {
-            return new PedidoExpress()
+            PedidoExpress nuevo = new PedidoExpress()
             {
-                id = pedido.id,
                 cliente = MapperCliente.ToCliente(pedido.cliente),
                 lineas = MapperLinea.ToListadoLinea(pedido.lineas),
                 total = pedido.total,
@@ -77,6 +76,7 @@ namespace DTOs
                 plazoDias = pedido.plazoDias,
                 activo = pedido.activo
             };
+            return nuevo;
         }
 
         public static DTOPedidoExpress ToDTOPedidoExpress(PedidoExpress pedido)

@@ -169,13 +169,15 @@ namespace Obligatorio.Controllers
                                     pedido.total = totalAcumulado + recargo + IVA;
 
                                     CUAltaPedidoComun.Alta(pedido);
-
+                                    
                                 }
                                 else
                                 {
                                     throw new DatosInvalidosException("Hubo un error a la hora de cargar la distancia del pedido");
                                 }
+                                
                             }
+                            return RedirectToAction(nameof(Index));
                         }
                         else
                         {
@@ -191,8 +193,6 @@ namespace Obligatorio.Controllers
                 {
                     throw new DatosInvalidosException("El usuario que selecciono no esta registrado!");
                 }
-
-                return RedirectToAction(nameof(Index));
             }
             catch (DatosInvalidosException ex)
             {
@@ -200,7 +200,7 @@ namespace Obligatorio.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Mensaje = "Ocurrió un error inesperado. No se hizo el alta del pedido";
+                ViewBag.Mensaje = ex;
             }
 
 

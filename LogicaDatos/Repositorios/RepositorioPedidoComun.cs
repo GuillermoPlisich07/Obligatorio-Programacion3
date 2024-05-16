@@ -1,5 +1,7 @@
 ﻿using LogicaNegocio.Dominio;
+using LogicaNegocio.ExcepcionesDominio;
 using LogicaNegocio.InterfacesRepositorios;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +23,27 @@ namespace LogicaDatos.Repositorios
         {
             if (item != null)
             {
-                Contexto.PedidoComunes.Add(item);
-                Contexto.SaveChanges();
+                try
+                {
+                    // Verificar si ya hay una instancia de Cliente rastreada y desadjuntarla
+                    var existingCliente = Contexto.Clientes.Local.FirstOrDefault(c => c.id == item.cliente.id);
+                    if (existingCliente != null)
+                    {
+                        Contexto.Entry(existingCliente).State = EntityState.Detached;
+                    }
+
+                    // Adjuntar la nueva instancia de Cliente
+                    Contexto.Clientes.Attach(item.cliente);
+
+                    Contexto.PedidoComunes.Add(item);
+                    Contexto.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                
+                
             }
         }
 
