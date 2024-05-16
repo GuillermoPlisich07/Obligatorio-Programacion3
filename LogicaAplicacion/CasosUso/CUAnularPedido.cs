@@ -1,5 +1,6 @@
 ﻿using DTOs;
 using LogicaAplicacion.InterfacesCU;
+using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
 using System;
 using System.Collections.Generic;
@@ -9,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUListadoPedido : ICUListado<DTOPedidoSimple>
+    public class CUAnularPedido : ICUAnular
     {
         public IRepositorioPedido Repo { get; set; }
 
-        public CUListadoPedido(IRepositorioPedido repo)
+        public CUAnularPedido(IRepositorioPedido repo)
         {
             Repo = repo;
         }
 
-        public List<DTOPedidoSimple> ObtenerListado()
+        public void Anular(int id)
         {
-            return MapperPedido.ToListadoPedidoSimpleDTO(Repo.FindAll().Where(e => e.activo == true).ToList());
+            Repo.Anular(id);
         }
     }
 }

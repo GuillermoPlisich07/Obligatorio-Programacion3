@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUListadoPedido : ICUListado<DTOPedidoSimple>
+    public class CUBuscarPedido : ICUBuscarPorId<DTOPedidoSimple>
     {
         public IRepositorioPedido Repo { get; set; }
 
-        public CUListadoPedido(IRepositorioPedido repo)
+        public CUBuscarPedido(IRepositorioPedido repo)
         {
             Repo = repo;
         }
 
-        public List<DTOPedidoSimple> ObtenerListado()
+        public DTOPedidoSimple Buscar(int id)
         {
-            return MapperPedido.ToListadoPedidoSimpleDTO(Repo.FindAll().Where(e => e.activo == true).ToList());
+            return MapperPedido.ToDTOPedidoSimpe(Repo.FindById(id));
         }
     }
 }

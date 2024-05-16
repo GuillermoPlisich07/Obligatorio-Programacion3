@@ -55,5 +55,17 @@ namespace LogicaDatos.Repositorios
             Contexto.Update(obj);
             Contexto.SaveChanges();
         }
+
+        public void Anular(int id)
+        {
+
+            Pedido actualizar = Contexto.Pedidos.Find(id);
+            actualizar.activo = false;
+            if (actualizar != null)
+            {
+                Contexto.Pedidos.Update(actualizar);
+                Contexto.SaveChanges();
+            }
+        }
     }
 }

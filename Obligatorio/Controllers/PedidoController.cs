@@ -11,7 +11,7 @@ namespace Obligatorio.Controllers
 {
     public class PedidoController : Controller
     {
-        public ICUBaja CUBajaPedido { get; set; }
+        
         public ICUAlta<DTOPedidoExpress> CUAltaPedidoExpress {  get; set; }
         public ICUAlta<DTOPedidoComun> CUAltaPedidoComun { get; set; }
         public ICUListado<DTOCliente> CUListadoCliente { get; set; }
@@ -19,15 +19,17 @@ namespace Obligatorio.Controllers
         public ICUBuscarPorId<DTOCliente> CUBuscarCliente { get; set; }
         public ICUBuscarPorId<DTOArticulo> CUBuscarArticulo { get; set; }
         public ICUBuscarPorId<DTOImpuesto> CUBuscarImpuesto { get; set; }
-        public ICUListado<DTOPedidoSimple> CUListadoPedidoSimple{ get; set; }
+        public ICUBuscarPorId<DTOPedidoSimple> CUBuscarPedido { get; set; }
+        public ICUListado<DTOPedidoSimple> CUListadoPedidoSimple { get; set; }
+        public ICUAnular CUAnular { get; set; }
 
 
-        public PedidoController(ICUBaja cUBajaPedido, ICUListado<DTOCliente> cUListadoCliente, ICUListado<DTOArticulo> cUListadoArticulo,
+        public PedidoController(ICUAnular cUAnular, ICUListado<DTOCliente> cUListadoCliente, ICUListado<DTOArticulo> cUListadoArticulo,
             ICUBuscarPorId<DTOCliente> cUBuscarCliente, ICUBuscarPorId<DTOArticulo> cUBuscarArticulo, ICUBuscarPorId<DTOImpuesto> cUBuscarImpuesto,
             ICUAlta<DTOPedidoExpress> cUAltaPedidoExpress, ICUAlta<DTOPedidoComun> cUAltaPedidoComun,
-            ICUListado<DTOPedidoSimple> cUListadoPedidoSimple)
+            ICUListado<DTOPedidoSimple> cUListadoPedidoSimple, ICUBuscarPorId<DTOPedidoSimple> cUBuscarPedido)
         {
-            CUBajaPedido = cUBajaPedido;
+            
             CUListadoCliente = cUListadoCliente;
             CUListadoArticulo = cUListadoArticulo;
             CUBuscarCliente = cUBuscarCliente;
@@ -36,6 +38,8 @@ namespace Obligatorio.Controllers
             CUAltaPedidoExpress = cUAltaPedidoExpress;
             CUAltaPedidoComun = cUAltaPedidoComun;
             CUListadoPedidoSimple = cUListadoPedidoSimple;
+            CUBuscarPedido = cUBuscarPedido;
+            CUAnular = cUAnular;
         }
 
 
@@ -246,16 +250,18 @@ namespace Obligatorio.Controllers
         // GET: PedidoController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            DTOPedidoSimple t = CUBuscarPedido.Buscar(id);
+            return View(t);
         }
 
         // POST: PedidoController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, DTOPedidoSimple item)
         {
             try
             {
+                CUAnular.Anular(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

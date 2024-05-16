@@ -9,5 +9,6 @@ namespace LogicaNegocio.InterfacesRepositorios
 {
     public interface IRepositorioPedido : IRepositorio<Pedido>
     {
+        void Anular(int id);
     }
 }
