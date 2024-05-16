@@ -41,7 +41,7 @@ namespace Obligatorio.Controllers
         // GET: PedidoController
         public ActionResult Index()
         {
-            
+            //List<DTOPedido> lista = CU
             return View();
         }
 
@@ -72,6 +72,7 @@ namespace Obligatorio.Controllers
 
                 if (existeCliente!=null)
                 {
+
                     DateTime fechaPrometida = nuevo.fechaPrometida;
                     DateTime hoy = DateTime.Now;
                     if (fechaPrometida.Year >= hoy.Year && fechaPrometida.Month >= hoy.Month && fechaPrometida.Day >= hoy.Day)
@@ -79,6 +80,9 @@ namespace Obligatorio.Controllers
                         if (nuevo.lineas != null)
                         {
                             decimal totalAcumulado=0;
+                            DTOPedidoComun dTOPedidoComun = new DTOPedidoComun();
+                            DTOPedidoExpress dTOPedidoExpress = new DTOPedidoExpress();
+
                             List<DTOLinea> lineas = nuevo.lineas;
                             List<DTOLinea> lineasAgregar = new List<DTOLinea>();
                             foreach (var linea in lineas )
@@ -135,6 +139,8 @@ namespace Obligatorio.Controllers
 
                                     pedido.total = totalAcumulado + recargo + IVA;
 
+
+                                    dTOPedidoExpress = pedido;
                                     CUAltaPedidoExpress.Alta(pedido);
 
                                 }
@@ -168,6 +174,7 @@ namespace Obligatorio.Controllers
 
                                     pedido.total = totalAcumulado + recargo + IVA;
 
+                                    dTOPedidoComun = pedido;
                                     CUAltaPedidoComun.Alta(pedido);
                                     
                                 }
@@ -177,6 +184,7 @@ namespace Obligatorio.Controllers
                                 }
                                 
                             }
+
                             return RedirectToAction(nameof(Index));
                         }
                         else

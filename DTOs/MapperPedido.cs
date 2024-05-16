@@ -108,5 +108,52 @@ namespace DTOs
         {
             return pedidos.Select(pedido => ToDTOPedidoExpress(pedido)).ToList();
         }
+
+
+
+        public static Pedido ToPedido(DTOPedido pedido)
+        {
+            Pedido nuevo = new Pedido()
+            {
+                cliente = MapperCliente.ToCliente(pedido.cliente),
+                lineas = MapperLinea.ToListadoLinea(pedido.lineas),
+                total = pedido.total,
+                IVA = pedido.IVA,
+                recarga = pedido.recarga,
+                fechaPrometida = pedido.fechaPrometida,
+                activo = pedido.activo
+            };
+            return nuevo;
+        }
+
+
+        public static DTOPedido ToDTOPedido(Pedido pedido)
+        {
+
+            if (pedido != null)
+            {
+                return new DTOPedido()
+                {
+                    id = pedido.id,
+                    cliente = MapperCliente.ToDTOCliente(pedido.cliente),
+                    lineas = MapperLinea.ToListadoLineaDTO(pedido.lineas),
+                    total = pedido.total,
+                    IVA = pedido.IVA,
+                    recarga = pedido.recarga,
+                    fechaPrometida = pedido.fechaPrometida,
+                    activo = pedido.activo
+                };
+            }
+            return null;
+        }
+
+        public static List<Pedido> ToListadoPedido(List<DTOPedido> pedidos)
+        {
+            return pedidos.Select(pedido => ToPedido(pedido)).ToList();
+        }
+        public static List<DTOPedido> ToListadoPedidoDTO(List<Pedido> pedidos)
+        {
+            return pedidos.Select(pedido => ToDTOPedido(pedido)).ToList();
+        }
     }
 }
