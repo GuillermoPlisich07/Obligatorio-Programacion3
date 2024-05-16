@@ -18,7 +18,7 @@ namespace Obligatorio
 
             builder.Services.AddScoped<ICUAlta<DTOPedidoExpress>, CUAltaPedidoExpress>();
             builder.Services.AddScoped<ICUAlta<DTOPedidoComun>, CUAltaPedidoComun>();
-            //builder.Services.AddScoped<ICUListado<DTOPedido>, CUListadoPedido>();
+            builder.Services.AddScoped<ICUListado<DTOPedidoSimple>, CUListadoPedido>();
             //builder.Services.AddScoped<ICUBaja, CUBajaPedido>();
 
             //TODO

@@ -1,5 +1,4 @@
-﻿@model IEnumerable<DTOs.DTOPedido>
-
+﻿@model IEnumerable<DTOs.DTOPedidoSimple>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,10 +13,22 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaPedido)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.total)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IVA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.recarga)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.fechaPrometida)
@@ -26,26 +37,32 @@
         </tr>
     </thead>
     <tbody>
-    @if(Model!=null){
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.total)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IVA)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fechaPrometida)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-                </td>
-            </tr>
-        }
-    }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cliente.RazonSocial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.recarga)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaPrometida)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>

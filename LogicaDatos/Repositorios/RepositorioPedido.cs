@@ -1,5 +1,6 @@
 ﻿using LogicaNegocio.Dominio;
 using LogicaNegocio.InterfacesRepositorios;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +29,13 @@ namespace LogicaDatos.Repositorios
 
         public List<Pedido> FindAll()
         {
-            return Contexto.Pedidos.ToList();
+            return Contexto.Pedidos.Include(p => p.cliente).ToList();
         }
 
         public Pedido FindById(int id)
         {
             return Contexto.Pedidos
+                .Include(p => p.cliente)
                 .Where(Pedido => Pedido.id == id)
                 .SingleOrDefault();
         }

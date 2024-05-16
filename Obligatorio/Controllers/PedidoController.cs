@@ -19,11 +19,13 @@ namespace Obligatorio.Controllers
         public ICUBuscarPorId<DTOCliente> CUBuscarCliente { get; set; }
         public ICUBuscarPorId<DTOArticulo> CUBuscarArticulo { get; set; }
         public ICUBuscarPorId<DTOImpuesto> CUBuscarImpuesto { get; set; }
+        public ICUListado<DTOPedidoSimple> CUListadoPedidoSimple{ get; set; }
 
 
         public PedidoController(ICUBaja cUBajaPedido, ICUListado<DTOCliente> cUListadoCliente, ICUListado<DTOArticulo> cUListadoArticulo,
             ICUBuscarPorId<DTOCliente> cUBuscarCliente, ICUBuscarPorId<DTOArticulo> cUBuscarArticulo, ICUBuscarPorId<DTOImpuesto> cUBuscarImpuesto,
-            ICUAlta<DTOPedidoExpress> cUAltaPedidoExpress, ICUAlta<DTOPedidoComun> cUAltaPedidoComun)
+            ICUAlta<DTOPedidoExpress> cUAltaPedidoExpress, ICUAlta<DTOPedidoComun> cUAltaPedidoComun,
+            ICUListado<DTOPedidoSimple> cUListadoPedidoSimple)
         {
             CUBajaPedido = cUBajaPedido;
             CUListadoCliente = cUListadoCliente;
@@ -33,6 +35,7 @@ namespace Obligatorio.Controllers
             CUBuscarImpuesto = cUBuscarImpuesto;
             CUAltaPedidoExpress = cUAltaPedidoExpress;
             CUAltaPedidoComun = cUAltaPedidoComun;
+            CUListadoPedidoSimple = cUListadoPedidoSimple;
         }
 
 
@@ -41,8 +44,8 @@ namespace Obligatorio.Controllers
         // GET: PedidoController
         public ActionResult Index()
         {
-            //List<DTOPedido> lista = CU
-            return View();
+            List<DTOPedidoSimple> lista = CUListadoPedidoSimple.ObtenerListado().ToList();
+            return View(lista);
         }
 
         // GET: PedidoController/Details/5

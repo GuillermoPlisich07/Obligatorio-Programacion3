@@ -153,5 +153,28 @@ namespace DTOs
         {
             return pedidos.Select(pedido => ToDTOPedido(pedido)).ToList();
         }
+
+
+
+        public static DTOPedidoSimple ToDTOPedidoSimpe (Pedido pedido)
+        {
+
+            if (pedido != null)
+            {
+                return new DTOPedidoSimple()
+                {
+                    id = pedido.id,
+                    cliente = MapperCliente.ToDTOCliente(pedido.cliente),
+                    total = pedido.total,
+                    IVA = pedido.IVA,
+                    fechaPrometida = pedido.fechaPrometida,
+                };
+            }
+            return null;
+        }
+        public static List<DTOPedidoSimple> ToListadoPedidoSimpleDTO(List<Pedido> pedidos)
+        {
+            return pedidos.Select(pedido => ToDTOPedidoSimpe(pedido)).ToList();
+        }
     }
 }
