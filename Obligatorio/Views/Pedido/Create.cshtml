@@ -1,40 +1,128 @@
-﻿@model DTOs.DTOPedido
+﻿@model DTOs.DTOCrearPedido
 
 @{
     ViewData["Title"] = "Create";
 }
 
 <h1>Create</h1>
-
+<span>@ViewBag.Mensaje</span>
 <h4>Pedido</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
             <div class="form-group">
-                <label asp-for="total" class="control-label"></label>
-                <input asp-for="total" class="form-control" />
-                <span asp-validation-for="total" class="text-danger"></span>
+                <label asp-for="clienteId" class="control-label">Cliente</label>
+                <select asp-for="clienteId" class="form-control">
+                    <option value="">Seleccione un Cliente</option>
+                    @if (Model.clientes != null)
+                    {
+                        @foreach (var cliente in Model.clientes)
+                        {
+                            <option value="@cliente.Id">@cliente.RazonSocial</option>
+                        }
+                    }
+                    
+                </select>
+                <span asp-validation-for="clienteId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="IVA" class="control-label"></label>
-                <input asp-for="IVA" class="form-control" />
-                <span asp-validation-for="IVA" class="text-danger"></span>
+                <label asp-for="tipoPedido" class="control-label">Tipo de Pedido</label>
+                <select asp-for="tipoPedido" class="form-control" id="tipoPedido">
+                    <option value="">Seleccione un Tipo</option>
+                    <option value="express">Pedido Express</option>
+                    <option value="comun">Pedido Común</option>
+                </select>
+                <span asp-validation-for="tipoPedido" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="recarga" class="control-label"></label>
-                <input asp-for="recarga" class="form-control" />
-                <span asp-validation-for="recarga" class="text-danger"></span>
+
+            <div class="form-group" id="plazoDiasGroup" style="display: none;">
+                <label asp-for="plazoDias" class="control-label"></label>
+                <input asp-for="plazoDias" class="form-control" />
+                <span asp-validation-for="plazoDias" class="text-danger"></span>
             </div>
+
+            <div class="form-group" id="distanciaGroup" style="display: none;">
+                <label asp-for="distancia" class="control-label"></label>
+                <input asp-for="distancia" class="form-control" />
+                <span asp-validation-for="distancia" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="fechaPrometida" class="control-label"></label>
                 <input asp-for="fechaPrometida" class="form-control" />
                 <span asp-validation-for="fechaPrometida" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label for="Id" class="control-label">Artículo</label>
+                <select id="Id" class="form-control">
+                    <option value="">Seleccione un artículo</option>
+                    @if (Model.articulos != null)
+                    {
+                        @foreach (var articulo in Model.articulos)
+                        {
+                            <option value="@articulo.Id" data-nombre="@articulo.Nombre" 
+                            data-precio="@articulo.PrecioPublico">@articulo.Nombre</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cantidad" class="control-label">Cantidad</label>
+                <input type="number" id="cantidad" class="form-control" min="1" />
+            </div>
+
+            <br />
+            <div class="form-group">
+                <button type="button" id="btnAgregar" class="btn btn-secondary">Agregar</button>
+            </div>
+
+            <table class="table" id="lineasTable">
+                <thead>
+                    <tr>
+                        <th>Artículo</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Renderizar líneas existentes -->
+                    @if (Model.lineas!=null)
+                    {
+                        @foreach (var linea in Model.lineas)
+                        {
+                            var articulo = Model.articulos.Find(e => e.Id == linea.articulo.Id);
+                            if (articulo != null)
+                            {
+                                <tr>
+                                    <td>
+                                        @articulo.Nombre
+                                        <input type="hidden" name="lineas[@Model.lineas.IndexOf(linea)].articulo.Id" value="@linea.articulo.Id" />
+                                    </td>
+                                    <td>@linea.cantUnidades<input type="hidden" name="lineas[@Model.lineas.IndexOf(linea)].cantUnidades" value="@linea.cantUnidades" /></td>
+                                    <td>@linea.preUnitarioVigente.ToString("F2")<input type="hidden" name="lineas[@Model.lineas.IndexOf(linea)].preUnitarioVigente" value="@linea.preUnitarioVigente.ToString("F2")" /></td>
+                                    <td>@((linea.preUnitarioVigente * linea.cantUnidades).ToString("F2"))</td>
+                                    <td><button type="button" class="btn btn-danger btnEliminar">Eliminar</button></td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
+            
         </form>
     </div>
 </div>
@@ -44,5 +132,65 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }        
 }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btnAgregar').click(function () {
+            var Id = $('#Id').val();
+            var articuloNombre = $('#Id option:selected').data('nombre');
+            var precioUnitario = parseFloat($('#Id option:selected').data('precio'));
+            var cantidad = parseInt($('#cantidad').val(), 10);
+
+            if (!Id || isNaN(cantidad) || cantidad <= 0) {
+                alert('Debe seleccionar un artículo y una cantidad válida.');
+                return;
+            }
+
+            var subtotal = precioUnitario * cantidad;
+
+            var nuevaLinea = `
+                        <tr>
+                                <td>${articuloNombre}<input type="hidden" name="lineas[${$('#lineasTable tbody tr').length}].articulo.Id" value="${Id}" /></td>
+                            <td>${cantidad}<input type="hidden" name="lineas[${$('#lineasTable tbody tr').length}].cantUnidades" value="${cantidad}" /></td>
+                            <td>${precioUnitario.toFixed(2)}<input type="hidden" name="lineas[${$('#lineasTable tbody tr').length}].preUnitarioVigente" value="${precioUnitario.toFixed(2)}" /></td>
+                            <td>${subtotal.toFixed(2)}</td>
+                            <td><button type="button" class="btn btn-danger btnEliminar">Eliminar</button></td>
+                        </tr>
+                    `;
+
+            $('#lineasTable tbody').append(nuevaLinea);
+            $('#Id').val('');
+            $('#cantidad').val('');
+        });
+
+        // Delegado para manejar el evento de eliminación de una línea
+        $('#lineasTable').on('click', '.btnEliminar', function () {
+            $(this).closest('tr').remove();
+        });
+
+        // Manejar el cambio en el tipo de pedido
+        $('#tipoPedido').change(function () {
+            var tipoPedido = $(this).val();
+            if (tipoPedido === 'express') {
+                $('#plazoDiasGroup').show();
+                $('#distanciaGroup').hide();
+            } else if (tipoPedido === 'comun') {
+                $('#plazoDiasGroup').hide();
+                $('#distanciaGroup').show();
+            } else {
+                $('#plazoDiasGroup').hide();
+                $('#distanciaGroup').hide();
+            }
+        });
+
+        // Ejecutar al cambiar el tipo de pedido
+        $('#tipoPedido').change(manejarCambioTipoPedido);
+
+        // Ejecutar cuando se cargue la pantalla
+        manejarCambioTipoPedido();
+    });
+</script>

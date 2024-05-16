@@ -9,7 +9,6 @@ namespace LogicaNegocio.Dominio
 {
     public class PedidoComun : Pedido 
     {
-        [Required(ErrorMessage = "La distancia es obligatoria para los pedidos comunes")]
         public decimal distancia { get; set; }
 
     }

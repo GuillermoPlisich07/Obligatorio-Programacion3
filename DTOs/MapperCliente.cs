@@ -23,7 +23,7 @@ namespace DTOs
             };
         }
 
-        public static  DTOCliente ToDTOCliente(Cliente cliente)
+        public static DTOCliente ToDTOCliente(Cliente cliente)
         {
 
             return new DTOCliente()
@@ -37,6 +37,7 @@ namespace DTOs
                 Distancia = cliente.distancia,
             };
         }
+
         public static List<DTOCliente> ToListadoSimpleDTO(List<Cliente> clientes)
         {
             return clientes.Select(clientes => ToDTOCliente(clientes)).ToList();

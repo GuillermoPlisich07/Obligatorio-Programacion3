@@ -10,18 +10,19 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUAltaPedido : ICUAlta<DTOPedido>
+    public class CUAltaPedidoComun : ICUAlta<DTOPedidoComun>
     {
-        public IRepositorioPedido Repo { get; set; }
+        public IRepositorioPedidoComun Repo { get; set; }
 
-        public CUAltaPedido(IRepositorioPedido repo)
+        public CUAltaPedidoComun(IRepositorioPedidoComun repo)
         {
             Repo = repo;
         }
 
-        public void Alta(DTOPedido nuevo)
+        public void Alta(DTOPedidoComun nuevo)
         {
-            Repo.Add(MapperPedido.ToPedido(nuevo));
+            PedidoComun aux = MapperPedido.ToPedidoComun(nuevo);
+            Repo.Add(aux);
         }
     }
 }

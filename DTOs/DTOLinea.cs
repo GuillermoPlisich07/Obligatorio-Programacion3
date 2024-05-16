@@ -20,5 +20,6 @@ namespace DTOs
 
         [Required(ErrorMessage = "El precio unitario vigente es obligatorio.")]
         public decimal preUnitarioVigente { get; set; }
+
     }
 }

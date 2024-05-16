@@ -28,7 +28,7 @@ namespace LogicaDatos.Repositorios
 
         public List<Articulo> FindAll()
         {
-            return Contexto.Articulos.ToList();
+            return Contexto.Articulos.Where(e => e.stock > 0).ToList();
         }
 
         public Articulo FindById(int id)

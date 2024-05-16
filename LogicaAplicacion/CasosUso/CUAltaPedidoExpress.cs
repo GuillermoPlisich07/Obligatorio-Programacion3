@@ -10,18 +10,19 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso
 {
-    public class CUListadoPedido : ICUListado<DTOPedido>
+    public class CUAltaPedidoExpress : ICUAlta<DTOPedidoExpress>
     {
-        public IRepositorioPedido Repo { get; set; }
+        public IRepositorioPedidoExpress Repo { get; set; }
 
-        public CUListadoPedido(IRepositorioPedido repo)
+        public CUAltaPedidoExpress(IRepositorioPedidoExpress repo)
         {
             Repo = repo;
         }
 
-        public List<DTOPedido> ObtenerListado()
+        public void Alta(DTOPedidoExpress nuevo)
         {
-            return MapperPedido.ToListadoPedidoDTO(Repo.FindAll());
+            PedidoExpress aux = MapperPedido.ToPedidoExpress(nuevo);
+            Repo.Add(aux);
         }
     }
 }
