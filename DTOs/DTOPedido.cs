@@ -14,7 +14,6 @@ namespace DTOs
         public List<DTOLinea> lineas { get; set; }
         public decimal total { get; set; }
         public decimal IVA { get; set; }
-        public decimal recarga { get; set; }
         public DateTime fechaPrometida { get; set; }
         public Boolean activo { get; set; }
     }
